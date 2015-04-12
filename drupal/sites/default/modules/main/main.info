@@ -1,0 +1,5 @@
+name = Main
+description = "Some common function"
+package = "Together"
+core = 7.x
+files[] = main.module

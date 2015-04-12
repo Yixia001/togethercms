@@ -1,0 +1,24 @@
+
+// ==== Media Queries for a Responsive Design. ============================
+//   By default we suggest 4 levels of layout :
+//   default - large viewport - fixed, pixel based layout, two sidebars floating (@see ninsixtyfive.scss).
+//   second - medium viewport - fluid, precentage based layout, two sidebars floating (@see ninsixtyfive-narrow.scss).
+//   third - small viewport - fluid, precentage based layout, only first one floating (@see ninsixtyfive-narrower.scss).
+//   forth - no media queries - simple, content first, no sidebars layout (@see ninsixtyfive-narrowest.scss).
+// =========================================================================
+
+@import "susy/susy";
+@import "settings";
+$susy: map-merge($susy, (flow: rtl));
+
+// Layout for large viewports - default.
+@import "layout/desktop-first/sasson-base";
+
+// Layout for medium viewports
+@import "layout/desktop-first/sasson-large";
+
+// Layout for small viewports
+@import "layout/desktop-first/sasson-medium";
+
+// Layout for smallest viewports
+@import "layout/desktop-first/sasson-small";

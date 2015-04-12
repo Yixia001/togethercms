@@ -1,0 +1,15 @@
+table.last_sync_dates_table {
+	width: 400px;
+	border: 1px solid #D4E1FF;
+}
+table.last_sync_dates_table tr {
+	border: 1px solid #D4E1FF;
+}
+table.last_sync_dates_table td.header {
+	width: 180px;
+	font-weight: bold;
+	border: 1px solid #D4E1FF;
+}
+table.last_sync_dates_table td.value {
+	border: 1px solid #D4E1FF;
+}

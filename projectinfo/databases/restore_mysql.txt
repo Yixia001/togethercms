@@ -1,0 +1,8 @@
+mysql -uroot -proot -e "drop database if exists togetherdb"
+mysql -uroot -proot -e "create database if not exists togetherdb"
+mysql -uroot -proot -e "source togetherdb.sql" togetherdb
+
+
+mysql -uroot -pancaixia -e "drop database if exists togetherdb"
+mysql -uroot -pancaixia -e "create database if not exists togetherdb"
+mysql -uroot -pancaixia -e "source togetherdb.sql" togetherdb

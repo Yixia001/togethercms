@@ -1,0 +1,69 @@
+<?php
+require_once dirname ( __FILE__ ) . '/main.api.inc';
+require_once dirname ( __FILE__ ) . '/main.performance.inc';
+
+/**
+ * Implements hook_init().
+ * Copied from front_page.module
+ */
+function main_init() {
+	// Make sure front page module is not run when using cli (drush).
+	// Make sur front page module does not run when installing Drupal either.
+	if (drupal_is_cli () || drupal_installation_attempted ()) {
+		return;
+	}
+	// Don't run when site is in maintenance mode
+	if (variable_get ( 'maintenance_mode', 0 )) {
+		return;
+	}
+	// Ignore non index.php requests (like cron)
+	if (! empty ( $_SERVER ['SCRIPT_FILENAME'] ) && realpath ( DRUPAL_ROOT . '/index.php' ) != realpath ( $_SERVER ['SCRIPT_FILENAME'] )) {
+		return;
+	}
+	
+	if (! drupal_is_front_page ()) {
+		return;
+	}
+	
+	global $user;
+	if (user_is_anonymous () || in_array ( 'administrator', $user->roles ) || in_array ( 'admin user', $user->roles )) {
+		return;
+	}
+}
+
+/**
+ * Implement hook_user_view_alter().
+ */
+function main_user_view_alter(&$build) {
+	unset ( $build ['og_user_node'] );
+}
+
+/**
+ * Implement hook_form_alter().
+ */
+function main_form_alter(&$form, &$form_state, $form_id) {
+	if ($form_id == 'user_login') {
+		//$form ['name'] ['#title_display'] = 'invisible';
+		//$form ['pass'] ['#title_display'] = 'invisible';
+		unset($form['name']['#description']);
+		unset($form['pass']['#description']);
+	}
+	if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
+		$form['account']['pass']['#type'] = 'password';
+		$form['account']['pass']['#title'] = t('Password');
+		unset($form['account']['mail']['#description']);
+	  unset($form['account']['pass']['#description']);
+		if ($form_id == 'user_register_form') {
+			//$form['account']['mail']['#title_display'] = 'invisible';
+			//$form['account']['pass']['#title_display'] = 'invisible';
+		}
+		if ($form_id == 'user_profile_form') {
+			//hide($form['account']['mail']);
+			hide($form['account']['pass']);
+			hide($form['account']['current_pass']);
+			hide($form['account']['current_pass_required_values']);
+			//dpm($form['account'], 'x');
+			//$form['account']['pass']['#title_display'] = 'invisible';
+		}
+	}
+}
