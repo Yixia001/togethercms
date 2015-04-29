@@ -8,6 +8,7 @@ base theme = 'mobile_jquery'
 #stylesheets[all][] = 'css/jquerymobile.css'
 #stylesheets[all][] = 'css/jquerymobile.nativedroid.css'
 #stylesheets[all][] = 'css/jquerymobile.nativedroid.color.red.css'
+stylesheets[all][] = 'css/custom.css'
 
 regions[header] = 'Header'
 regions[highlighted] = 'Highlighted'
