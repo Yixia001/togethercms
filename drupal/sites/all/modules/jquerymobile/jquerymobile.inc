@@ -72,6 +72,7 @@ function jquerymobile_load_files() {
 
   drupal_add_library('jquerymobile', 'jquerymobile.jquery');
   drupal_add_js(_jquerymobile_build_js(), array('type' => 'inline', 'group' => JS_THEME, 'weight' => 102));
+ // drupal_add_library('jquerymobile', 'jquerymobile');
   if (_jquerymobile_get_setting($theme_key, 'custom_themes') != NULL) {
     drupal_add_css(variable_get('jquerymobile_custom_path', drupal_get_path('theme', $theme_key) . '/styles/jquery.mobile.overrides.css'), array(
       'type' => 'file',
@@ -79,9 +80,9 @@ function jquerymobile_load_files() {
       'every_page' => TRUE,
       'media' => 'all',
       'preprocess' => FALSE,
-      'weight' => 99,
+      'weight' => 1000,
     ));
-    drupal_add_library('jquerymobile', 'jquerymobile.custom');
+    drupal_add_library('jquerymobile', 'jquerymobile.custom');   
   }
   else {
     drupal_add_library('jquerymobile', 'jquerymobile');
