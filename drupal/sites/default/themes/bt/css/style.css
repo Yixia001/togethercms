@@ -5,3 +5,77 @@
 .panel-body .form-item {
 	padding:5px 0;
 }
+
+@CHARSET "UTF-8";
+	
+ body *{
+	font-size: 13px;
+	color:#666;
+	list-style:none;
+	font-family:"Microsoft YaHei","微软雅黑",sans-serif;
+}
+.header {
+	padding: 2px 0 4px 0;
+ height:38px;	
+}
+.form-radios .form-disabled {
+  display: none;
+}
+.form-item label{
+	display:inline;
+	}
+.form-type-textfield label,
+.form-type-textfield input{
+	//float:left;
+	}
+.user_profile {
+  font-size: 63%;	
+}
+a {
+	//color:#75c8e6;
+	text-decoration:none
+}
+.person_row {
+  background-color: #FFF;
+  border-radius: 5px;
+  border: 1px solid #E5E6E6;
+  box-shadow: 0px 3px 5px #D2D6DA;
+  
+  overflow: hidden;
+  padding: 0px;
+  min-height: 160px;
+  margin-bottom: 12px;
+}
+.user_basic{
+	display: inline;
+}
+.user_basic_text{
+	display:inline-block;
+	text-align: center;
+}
+.user_basic_photo{
+	min-width:70px;
+	min-height: 70px;
+	float: left;
+	margin：10px;
+}
+.user_basic_name{
+	font-size: 16pt;
+	float: left;
+	margin-right: 10px;
+}
+.user_basic_city{
+	font-size: 12pt;
+	float: left;
+	margin-right: 5px;
+}
+.user_basic_role{
+	font-size: 12pt;
+	float: left;
+	color: blue;
+	text-align: center;
+}
+.chuangye_info{
+	margin-left: 70px;
+	font-size: 12pt;
+}

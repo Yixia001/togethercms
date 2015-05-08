@@ -1,0 +1,5 @@
+name = "Rong yun chat"
+description = "Chat with Rong YUN."
+package = "Together"
+core = 7.x
+files[] = rychat.module

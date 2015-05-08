@@ -62,7 +62,10 @@ function main_form_alter(&$form, &$form_state, $form_id) {
 			hide($form['account']['pass']);
 			hide($form['account']['current_pass']);
 			hide($form['account']['current_pass_required_values']);
-			//dpm($form['account'], 'x');
+			hide($form['account']['mail']);
+			hide($form['locale']);
+			hide($form['flag_friend']);
+			
 			//$form['account']['pass']['#title_display'] = 'invisible';
 		}
 	}

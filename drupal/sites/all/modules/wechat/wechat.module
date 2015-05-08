@@ -76,7 +76,7 @@ function wechat_menu() {
     'file' => 'wechat.pages.inc',
   );
   $items['user/%user/wechat-binding'] = array(
-    'title' => 'Wechat binding',
+    'title' => t('Wechat binding'),
     'page callback' => 'wechat_user_binding_from_drupal',
     'page arguments' => array(1),
     'access callback' => TRUE,

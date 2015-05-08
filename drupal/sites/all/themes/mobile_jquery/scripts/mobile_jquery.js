@@ -1,5 +1,5 @@
 var $jqm = jQuery.noConflict();
-
+/*
 $jqm(document).bind("mobileinit", function() {
   $jqm.mobile.ns = '';
   $jqm.mobile.autoInitializePage = 1;
@@ -17,3 +17,4 @@ $jqm(document).bind("mobileinit", function() {
   $jqm.mobile.pushStateEnabled = 1;
   $jqm.mobile.touchOverflowEnabled = 0;
 });
+*/

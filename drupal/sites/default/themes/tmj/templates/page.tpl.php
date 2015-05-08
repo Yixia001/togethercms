@@ -67,23 +67,23 @@
  */
 ?>
 <div <?php print drupal_attributes($page['attributes_array']['page']); ?>>
-    <div class="header" <?php print drupal_attributes($page['attributes_array']['header']); ?>>
+    <div data-position="fixed" class="header ui-header" <?php print drupal_attributes($page['attributes_array']['header']); ?>>
       
-        <h1 class="site-name"><?php if ($title): ?><?php print $title; ?><?php endif; ?></h1>
+        <h1 class="site-name ui-title"><?php if ($title): ?><?php print $title; ?><?php endif; ?></h1>
       
       <?php if (module_exists('toolbar') && $is_admin): ?>
       <a href="#toolbar" data-role="button" data-rel="dialog" data-transition="pop" data-icon="grid" >Menu</a>
       <?php endif; ?>
 
       <?php if (!$is_front && !$is_admin): ?>
-      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" data-rel="home" data-icon="home" data-ajax="false"><span><?php print t('Home'); ?></span></a>
+      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" data-rel="home" data-icon="home" data-ajax="false" class="ui-link ui-btn-left ui-btn ui-icon-home ui-btn-icon-left ui-shadow ui-corner-all" ><span><?php print t('Home'); ?></span></a>
       <?php endif; ?>
        
       <?php if ($action_links): ?><div data-role="navbar"><ul class="action-links"><?php print render($action_links); ?></ul></div><?php endif; ?>
     </div> <!-- /#header -->
 
 
-    <div class="main-content" <?php print drupal_attributes($page['attributes_array']['content']); ?>>
+    <div class="main-content ui-content" <?php print drupal_attributes($page['attributes_array']['content']); ?>>
 
         <div class="content-primary">
 

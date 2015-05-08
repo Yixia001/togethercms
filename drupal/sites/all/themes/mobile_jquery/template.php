@@ -40,29 +40,6 @@ function mobile_jquery_preprocess_html(&$vars) {
   if (module_exists('jquerymobile')) {
     jquerymobile_load_files();
   }
-  else {
-   $css_options = array(
-      'type' => 'file', 
-      'group' => CSS_THEME, 
-      'every_page' => TRUE, 
-      'media' => 'all', 
-      'preprocess' => FALSE, 
-    );
-    $js_options = array(
-      'type' => 'file', 
-      'scope' => 'header', 
-      'group' => JS_THEME, 
-      'every_page' => TRUE, 
-      'preprocess' => TRUE, 
-      'cache' => TRUE, 
-      'defer' => FALSE,
-    );
-   drupal_add_css('http://code.jquery.com/mobile/1.0.1/jquery.mobile.structure-1.0.1.min.css', array_merge($css_options, array('weight' => 100)));
-   drupal_add_css('http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css', array_merge($css_options, array('weight' => 100)));
-   drupal_add_js('http://code.jquery.com/jquery-1.6.4.min.js', array_merge($js_options, array('weight' => 100)));
-   drupal_add_js(drupal_get_path('theme', 'mobile_jquery') . '/scripts/mobile_jquery.js', array_merge($js_options, array('weight' => 101)));
-   drupal_add_js('http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js', array_merge($js_options, array('weight' => 101)));
-   } 
   $vars['styles'] = drupal_get_css();
 
    if (isset($vars['page']['page_top']['toolbar'])) {
@@ -100,7 +77,8 @@ function mobile_jquery_preprocess_page(&$vars) {
   else {
     $classes[] = 'type-interior';
   }
-
+  $classes = array_merge($classes, array('ui-page', 'ui-page-theme-flatui', 'ui-page-active'));
+  
   $vars['page']['attributes_array']['page'] = array(
     'data-theme' => $use_global ? mobile_jquery_theme_get_setting('global_theme') : '',
     'data-role' => 'page',

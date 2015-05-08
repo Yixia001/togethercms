@@ -26,6 +26,11 @@ function bt_theme(&$existing, $type, $theme, $path) {
   		'render element' => 'form',
   		// other theme registration code...
   );
+  $hooks['user_profile_form'] = array(
+    'render element' => 'form',
+    'path' => drupal_get_path('theme', 'bt') . '/templates',
+    'template' => 'user/user-edit',
+  );
   return $hooks;
 }
  
@@ -38,6 +43,15 @@ function bt_preprocess_user_login(&$var) {
   ///$variables['rendered'] = drupal_render_children($variables['form']);
 }
 
+function bt_preprocess_user_profile_form(&$vars) {		
+	unset($vars['form']['group_basic']['field_gender'][LANGUAGE_NONE]['_none']);
+}
+
+function bt_preprocess_user_profile(&$vars) {
+	$user = user_load(36);
+	
+	dpm(file_create_url($user->picture->uri, TRUE), 'd');
+}
 //add class to buttons
 function bt_button1($variables) {
 	$element = $variables['element'];

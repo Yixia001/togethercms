@@ -1,0 +1,5 @@
+name = "sms account"
+description = "sms for register and login."
+package = "Together"
+core = 7.x
+files[] = smsaccount.module

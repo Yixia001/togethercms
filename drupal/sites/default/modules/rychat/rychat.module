@@ -1,0 +1,87 @@
+<?php
+require_once dirname(__FILE__) . '/rychat.api.inc';
+/**
+ * @file
+ * Adds link for refreshing captcha.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function rychat_menu() {
+  $items = array();
+  $items['rychat/%'] = array(
+    'type' => MENU_CALLBACK,
+    'page callback' => 'rychat_page',
+    'page arguments' => array(1),
+    'access callback' => TRUE
+  );
+  $items['rychat_token'] = array(
+    'page callback' => 'rychat_token',
+    //'page arguments' => array(2),
+    'access callback' => TRUE
+  );
+  $items['rychat_target'] = array(
+    'page callback' => 'rychat_target',
+    //'page arguments' => array(2),
+    'access callback' => TRUE
+  );
+  $items['rychat_target/%'] = array(
+    'page callback' => 'rychat_target',
+    'page arguments' => array(1),
+    'access callback' => TRUE
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function rychat_theme() {
+  $theme = array(
+	    'rychat_page' => array(
+      'variables' => array('user' => NULL, 'settings' => NULL),
+      'template' => 'template/rychat-page',
+	  ),
+	);
+	return $theme;
+}
+
+/**
+ * Image captcha refresh ajax handler.
+ * @param $form_id For which form need refresh captcha image
+ * @return Data in json format
+ */
+function rychat_page($user) {
+	global $base_path;
+  global $base_url;
+
+    // $my_base_path = $GLOBALS['base_url'] . $GLOBALS['base_path'];
+  $my_base_path = $base_url . $base_path;
+
+
+       $my_settings = array(
+         'basePath' => $my_base_path . drupal_get_path('module', 'rychat') . '/template/',
+       );
+
+  drupal_add_js(array('rychat' => $my_settings), 'setting');
+  drupal_add_css(drupal_get_path('module', 'rychat') . '/template/static/css/main.css');
+  drupal_add_js('http://res.websdk.rongcloud.cn/RongIMClient-0.9.8.min.js');
+  drupal_add_js('http://res.websdk.rongcloud.cn/RongIMClient.voice-0.9.1.min.js');
+  drupal_add_js('http://res.websdk.rongcloud.cn/RongIMClient.emoji-0.9.2.min.js');
+  drupal_add_js(drupal_get_path('module', 'rychat') . '/template/static/js/common.js');
+  drupal_add_js(drupal_get_path('module', 'rychat') . '/template/static/js/engine.js');
+  drupal_add_js(drupal_get_path('module', 'rychat') . '/template/static/js/jquery.nicescroll.js');
+  $settings['pre_path'] = '/' . drupal_get_path('module', 'rychat')  . '/template';
+  return theme('rychat_page', array('user'=>NULL, 'settings' => $settings));
+}
+
+function rychat_token($uid = NULL) {
+  $token = rychat_token_api();  
+  return drupal_json_output($token);
+}
+
+function rychat_target($uid = NULL) {
+  $token = rychat_token_api($uid);  
+  return drupal_json_output($token);
+}
