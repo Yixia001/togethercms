@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function rongimchat_schema() {
+  $schema = array();
+    $schema['rongimchat_token'] = array(
+    'description' => 'The table store user\'s token from rongyun.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary key, auto increment.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'uid' => array(
+        'description' => 'user id.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'created' => array(
+        'description' => 'When the submission is first saved.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'token' => array(
+        'description' => 'token from rongyun.',
+        'type' => 'varchar',
+        'length' => 260,
+        'not null' => FALSE,
+        'default' => '0',
+      ),
+      'remote_addr' => array(
+        'description' => 'User\'s IP address.',
+        'type' => 'varchar',
+        'length' => 128,
+      ),
+    ),
+    'primary key' => array('id'),
+    'unique keys' => array(
+      'uid' => array('uid'),
+    ),
+    'indexes' => array(
+      'token' => array('token'),
+    ),
+  );
+
+  return $schema;
+}

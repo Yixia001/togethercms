@@ -272,15 +272,23 @@ jQuery.noConflict();
                     break;
                 //其他设备登陆
                 case RongIMClient.ConnectionStatus.OTHER_DEVICE_LOGIN:
+                	location.href = "/WebIMDemo/login1.html";
+                    break;
                 //连接关闭
                 case RongIMClient.ConnectionStatus.CLOSURE:
+                	location.href = "/";
+                    break;
                 //未知错误
                 case RongIMClient.ConnectionStatus.UNKNOWN_ERROR:
+                	location.href = "/WebIMDemo/login3.html";
+                    break;
                 //登出
                 case RongIMClient.ConnectionStatus.LOGOUT:
+                	location.href = "/WebIMDemo/login4.html";
+                    break;
                 //用户已被封禁
                 case RongIMClient.ConnectionStatus.BLOCK:
-                    location.href = "/WebIMDemo/login.html";
+                    location.href = "/WebIMDemo/login5.html";
                     break;
             }
         }

@@ -1,8 +1,4 @@
 <?php
-//数据库连接
-define("DB_DNS","mysql:host=127.0.0.1;dbname=demoserver");
-define("DB_USER","xxxx");
-define("DB_PASSWORD","xxxxxxxx");
 
 //融云API地址
 define("RONGCLOUD_API_URL","http://api.cn.rong.io");

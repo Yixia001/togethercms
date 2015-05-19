@@ -1,0 +1,6 @@
+name = "Rong yun IM chat"
+description = "Rong yun IM chat."
+package = "Together"
+core = 7.x
+files[] = rongimchat.admin.inc
+files[] = rongimchat.module

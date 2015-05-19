@@ -179,7 +179,7 @@
         if ($(".pagetion_list") && $(".pagetion_list").is(":visible") == true) {
             otherHeight = $(".pagetion_list").height() + conf.pc.Mb;
         }
-        var msgBoxHeight = intBoxHeight - otherHeight;
+        var msgBoxHeight = intBoxHeight - otherHeight-100 ;
         $(".dialog_box").css('height', msgBoxHeight);
     };
     /**
