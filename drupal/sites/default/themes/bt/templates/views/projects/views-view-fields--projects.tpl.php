@@ -23,40 +23,14 @@
  *
  * @ingroup views_templates
  */
-
 ?>
-<div class="user_basic">
-<div class="user_basic_photo">
-<?php print $fields['picture']->content?>
-</div>
-<div class="user_basic_text">
-<div class="user_basic_name">
-<?php print $fields['field_nikename']->content?>
-</div>
-<div class="user_basic_city">
-<?php print $fields['field_address_locality']->content?>
-</div>
-<div class="user_basic_role">
-<?php print $fields['field_role_type']->content?>
-</div>
-</div>
-<div>
-<?php print "移动互联网 O2O"?>
-</div>
-</div>
+<?php foreach ($fields as $id => $field): ?>
+  <?php if (!empty($field->separator)): ?>
+    <?php print $field->separator; ?>
+  <?php endif; ?>
 
-<div class="chuangye_info">
- 工作状态：<?php print $fields['field_co_status']->content?>
-</div>
-<div class="chuangye_info">
-<?php print "工作年限： " . $fields['field_work_years']->content?>
-</div>
-<div class="chuangye_info">
-<?php print "创业状态： ". $fields['field_nopay_period']->content?>
-</div>
-<div class="chuangye_info">
-<?php print "期望保障： ". $fields['field_expectation']->content?>
-</div>
-<?php print $fields['ops']->content?><br>
-<?php print $fields['friend_link']->content?><br>
-<a href="/rychat/<?php print $row->uid?>" target="_blank">联系合伙人</a>
+  <?php print $field->wrapper_prefix; ?>
+    <?php print $field->label_html; ?>
+    <?php print $field->content; ?>
+  <?php print $field->wrapper_suffix; ?>
+<?php endforeach; ?>
