@@ -24,13 +24,36 @@
  * @ingroup views_templates
  */
 ?>
-<?php foreach ($fields as $id => $field): ?>
-  <?php if (!empty($field->separator)): ?>
-    <?php print $field->separator; ?>
-  <?php endif; ?>
+<li>
+	<div class="upPart">
+		<?php print $fields['field_project_logo']->content?>
+		<div class="name"><?php print $fields['title']->content?></div>
+		<div class="type item">电子商务 O2O</div>
+		<div class="status item">上海/天使轮/测试阶段</div>
+		<div class="desc item">面向95和00后的偶像养成移动社区</div>
+	</div>
+	<div class="jindutiao">
+		<div class="curJindu"></div>
+	</div>
+	<div class="rongziInfo clear">
+		<div class="rongzi fl">已融资50万（预融资150万）</div>
+		<div class="time fr">剩余<span>30</span>天</div>
+	</div>
+	<div class="downPart clear">
+		<div class="btn-group fr" role="group">
+		  	<button type="button" class="btn btn-default">
+		  		<span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="content">26</span>
+		 	</button>
+		  	<button type="button" class="btn btn-default">
+		  		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span><span class="content">199</span>
+		  	</button>
+		  	<button type="button" class="btn btn-default">
+		  		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span class="content">212</span>
+		  	</button>
+		  	<button type="button" class="btn btn-default">
+		  		<span class="glyphicon glyphicon-time" aria-hidden="true"></span><span class="content">2015.2.15</span>
+		  	</button>
+		</div>
+	</div>
 
-  <?php print $field->wrapper_prefix; ?>
-    <?php print $field->label_html; ?>
-    <?php print $field->content; ?>
-  <?php print $field->wrapper_suffix; ?>
-<?php endforeach; ?>
+</li>

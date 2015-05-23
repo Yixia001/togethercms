@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<title>项目列表页</title>
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/commonHeaderFooter.css">
+	<link rel="stylesheet" href="./css/itemList.css">
+</head>
+<body>
+	<div class="header">
+		<span class="hleft">
+			<img src="./img/backBtn.png" alt="">
+		</span>
+		<span class="hright">
+			<img src="./img/shoucangBtn.png" alt="">
+		</span>
+		<span class="hright2">
+			<img src="./img/shoucangBtn.png" alt="">
+		</span>
+		<span>项目</span>
+	</div>
+	<div class="input-group queryInput hid">
+	  	<input type="text" class="form-control submitNo" placeholder="请输入查询条件" aria-describedby="basic-addon2">
+	  	<span class="input-group-btn">
+        	<button class="btn btn-default queryBtn" type="button">查询</button>
+      	</span>
+	</div>
+	<table class="table table-bordered" id="typeListTable">
+		<tr>
+			<td class="active">默认</td>
+			<td>最新</td>
+			<td>热门</td>
+		</tr>
+		<tr>
+			<td>人脉圈项目</td>
+			<td>名企项目</td>
+			<td>名校项目</td>
+		</tr>
+	</table>
+	<div class="container">
+		<ul class="itemListUl">
+			<li>
+				<div class="upPart">
+					<img src="./img/2.jpg" alt="">
+					<div class="name">北斗天使</div>
+					<div class="type item">电子商务 O2O</div>
+					<div class="status item">上海/天使轮/测试阶段</div>
+					<div class="desc item">面向95和00后的偶像养成移动社区</div>
+				</div>
+				<div class="jindutiao">
+					<div class="curJindu"></div>
+				</div>
+				<div class="rongziInfo clear">
+					<div class="rongzi fl">已融资50万（预融资150万）</div>
+					<div class="time fr">剩余<span>30</span>天</div>
+				</div>
+				<div class="downPart clear">
+					<div class="btn-group fr" role="group">
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="content">26</span>
+					 	</button>
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span><span class="content">199</span>
+					  	</button>
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span class="content">212</span>
+					  	</button>
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-time" aria-hidden="true"></span><span class="content">2015.2.15</span>
+					  	</button>
+					</div>
+				</div>
+
+			</li>
+			<li>
+				<div class="upPart">
+					<img src="./img/2.jpg" alt="">
+					<div class="name">北斗天使</div>
+					<div class="type item">电子商务 O2O</div>
+					<div class="status item">上海/天使轮/测试阶段</div>
+					<div class="desc item">面向95和00后的偶像养成移动社区</div>
+				</div>
+				<div class="jindutiao">
+					<div class="curJindu"></div>
+				</div>
+				<div class="rongziInfo clear">
+					<div class="rongzi fl">已融资50万（预融资150万）</div>
+					<div class="time fr">剩余<span>30</span>天</div>
+				</div>
+				<div class="downPart clear">
+					<div class="btn-group fr" role="group">
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="content">26</span>
+					 	</button>
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span><span class="content">199</span>
+					  	</button>
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span class="content">212</span>
+					  	</button>
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-time" aria-hidden="true"></span><span class="content">2015.2.15</span>
+					  	</button>
+					</div>
+				</div>
+
+			</li>
+		</ul>
+	</div>
+	<ul class="btnsUl clear">
+		<li>找投资人</li>
+		<li class="active">投资项目</li>
+		<li>找合伙人</li>
+		<li>消息</li>
+	</ul>
+
+	<div class="filterZone hid">
+		<ul>
+			<li class="lunci item clear">
+				<span>名称1： </span>
+				<ul>
+					<li>全部</li>
+					<li>天使轮</li>
+					<li>Pre-A轮</li>
+					<li>A轮</li>
+					<li>B轮</li>
+				</ul>
+			</li>
+			<li class="city item clear">
+				<span>名称2： </span>
+				<ul>
+					<li>全部</li>
+					<li>北京</li>
+					<li>上海</li>
+					<li>深圳</li>
+					<li>广州</li>
+					<li>成都</li>
+					<li>杭州</li>
+					<li>南京</li>
+					<li>深圳</li>
+					<li>广州</li>
+					<li>成都</li>
+					<li>杭州</li>
+					<li>南京</li>
+				</ul>
+			</li>
+			<li class="status item clear">
+				<span>名称3： </span>
+				<ul>
+					<li>全部</li>
+					<li>概念</li>
+					<li>研发</li>
+					<li>上线</li>
+					<li>盈利</li>
+				</ul>
+			</li>
+			<li class="type item clear">
+				<span>名称4： </span>
+				<ul>
+					<li>全部</li>
+					<li>
+						教育
+					</li>
+					<li>
+						电子商务
+					</li>
+					<li>
+						移动互联网
+					</li>
+					<li>
+						O2O
+					</li>
+					<li>
+						游戏
+					</li>
+					<li>
+						金融
+					</li>
+					<li>
+						硬件
+					</li>
+					<li>
+						医疗
+					</li>
+					<li>
+						餐饮
+					</li>
+					<li>
+						企业应用
+					</li>
+					<li>
+						平台
+					</li>
+					<li>
+						汽车
+					</li>
+					<li>
+						数据
+					</li>
+					<li>
+						娱乐、文化、视频
+					</li>
+					<li>
+						营销广告
+					</li>
+					<li>
+						搜索安全
+					</li>
+					<li>
+						创业服务
+					</li>
+					<li>
+						站长工具
+					</li>
+					<li>
+						体育
+					</li>
+					<li>
+						其他
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="filterMingQ hid clear">
+		<span>名企项目： </span>
+		<ul>
+			<li>腾讯</li>
+			<li>华为</li>
+			<li>阿里巴巴</li>
+			<li>百度</li>
+			<li>金山</li>
+		</ul>
+	</div>
+	<div class="filterMingX hid clear">
+		<span>名校项目： </span>
+		<ul>
+			<li>北京大学</li>
+			<li>清华大学</li>
+			<li>上海交通大学</li>
+		</ul>
+	</div>
+
+	<script src="./js/jquery-1.9.1.min.js"></script>
+	<script src="./js/itemList.js"></script>
+</body>
+</html>

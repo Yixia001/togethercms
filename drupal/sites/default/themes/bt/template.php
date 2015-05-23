@@ -50,7 +50,7 @@ function bt_preprocess_user_profile_form(&$vars) {
 function bt_preprocess_user_profile(&$vars) {
 	$user = user_load(36);
 	
-	dpm(file_create_url($user->picture->uri, TRUE), 'd');
+	//dpm(file_create_url($user->picture->uri, TRUE), 'd');
 }
 //add class to buttons
 function bt_button1($variables) {
@@ -198,4 +198,11 @@ function bt_form_element1($variables) {
 	$output .= "</div>\n";
 
 	return $output;
+}
+
+/**
+ * Overrides theme_menu_tree().
+ */
+function bt_menu_tree(&$variables) {
+	return '<ul class="menu btnsUl">' . $variables['tree'] . '</ul>';
 }
