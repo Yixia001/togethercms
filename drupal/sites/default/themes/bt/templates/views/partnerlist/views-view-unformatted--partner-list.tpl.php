@@ -7,9 +7,10 @@
  * @ingroup views_templates
  */
 ?>
-
+<ul class="touziUl">
 <?php foreach ($rows as $id => $row): ?>
-  <div<?php if ($classes_array[$id]) { print ' class="person_row ' . $classes_array[$id] .'"';  } ?>>
+  
     <?php print $row; ?>
-  </div>
+  
 <?php endforeach; ?>
+</ul>

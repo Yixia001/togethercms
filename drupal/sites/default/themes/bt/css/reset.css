@@ -1,0 +1,90 @@
+@charset "utf-8";
+
+/*样式重置,根据自己的网站量身订做,有就加,没有就不用加上去*/
+body,h1,h2,h3,h4,h5,h6,p,dl,dd,ul,ol,form,input,textarea,th,td,select{margin:0;padding:0;}
+em{font-style:normal;}
+li{list-style:none;}
+a{text-decoration:none;}
+img{border:none;vertical-align:top;}/*将img放到a中会有border,给它去掉,同时对齐*/
+table{border-collapse:collapse;}/*表格之间有间隙,合并掉*/
+input,textarea{outline:none;}/*在chrome下如果选中的时候,会自动有个高亮的动作,将其去掉*/
+textarea{resize:none;overflow:auto;}
+body{font-size:12px;font-family:"微软雅黑";}/*具体看自己的网站是怎么要求的*/
+
+body{
+	font-family: '微软雅黑','Helvetica Neue', Helvetica, Arial, sans-serif;
+	focus-ring-color: rgba(0, 0, 0, 0);  
+	-webkit-tap-highlight-color: rgba(0,0,0,0);  
+	-webkit-focus-ring-color: rgba(0, 0, 0, 0);  
+	-moz-tap-highlight-color: rgba(0,0,0,0);  
+	-moz-focus-ring-color: rgba(0, 0, 0, 0);
+}
+
+
+.clear{
+	zoom:1;
+}
+.clear:after{
+	display: block;
+	content: ' ';
+	clear:both;
+}
+
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+
+.header{
+	height: 48px;
+	background: #141414;
+	color: #ffffff;
+	font-size: 20px;
+	line-height: 48px;
+	text-align: center;
+	position: relative;
+}
+.footer{
+	
+}
+.btnsUl{
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+}
+.btnsUl li{
+	float: left;
+	background: #ef5518;
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+	width: 25%;
+	cursor: pointer;
+	color: #fff;
+}
+.btnsUl li.active{
+	background: #f88538;
+}
+.container{
+	width:100%;
+	margin:10px 0;
+	padding:0 0 0 0;
+}
+	.header img{
+		vertical-align: top;
+	}
+	.hleft{
+		position: absolute;
+		top: 0;
+		left: 0;
+		cursor: pointer;
+	}
+	.hright{
+		position: absolute;
+		top: 0;
+		right: 0;
+		cursor: pointer;
+	}

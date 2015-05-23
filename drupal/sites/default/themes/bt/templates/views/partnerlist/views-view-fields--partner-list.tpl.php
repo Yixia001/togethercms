@@ -25,6 +25,24 @@
  */
 
 ?>
+<li>
+				<?php print $fields['picture']->content?>
+				<div class="userInfo">
+					<div>
+						<span class="name"><?php print $fields['field_nikename']->content?></span>
+						<span class="weizhi"><?php print $fields['field_address_locality']->content?></span>
+					</div>
+					<div class="introduce">
+						<?php print $fields['field_role_type']->content?>
+					</div>
+					<div class="ly">
+						互联网金融/O2O/智能硬件/互联网金融
+					</div>
+					<div><?php print $fields['ops']->content?></div>
+					<div><?php print $fields['friend_link']->content?></div>
+				</div>
+</li>
+<div style="display:none;">
 <div class="user_basic">
 <div class="user_basic_photo">
 <?php print $fields['picture']->content?>
@@ -60,3 +78,4 @@
 <?php print $fields['ops']->content?><br>
 <?php print $fields['friend_link']->content?><br>
 <a href="/rychat/<?php print $row->uid?>" target="_blank">联系合伙人</a>
+</div>
