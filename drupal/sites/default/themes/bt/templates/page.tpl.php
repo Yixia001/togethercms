@@ -101,7 +101,7 @@
 		<?php print render($page['content']); ?>
 </div>
 	
-<div class="footer">
+<div class="foot">
 <?php print render($page['footer']); ?>
 
 </div>
