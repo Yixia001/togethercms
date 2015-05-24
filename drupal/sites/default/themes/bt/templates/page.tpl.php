@@ -86,13 +86,14 @@
 	    <?php endif;?>
 	    
 	      <a class="login_link" href="<?php if ($logged_in) { print '/user/logout'; } else { print '/user/login'; } ?>"><?php if ($logged_in) { print '登出'; } else { print '登录'; } ?></a>
-	       <?php if (!$logged_in){?> <a href="/user/login">注册</a><?php }?>
+	       <?php if (!$logged_in){?> <a href="/user/register">注册</a><?php }?>
 	      
 	    </div>
 		</div>
 		<span><?php if ($title): ?><?php print $title; ?><?php endif; ?></span>
 </div>
 <div class="main-container  container_content">
+    <?php print $messages; ?>
     <?php if ($tabs): ?>
         <div class="tabs">
           <?php print render($tabs); ?>
