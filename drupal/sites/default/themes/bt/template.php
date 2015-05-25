@@ -48,9 +48,64 @@ function bt_preprocess_user_profile_form(&$vars) {
 }
 
 function bt_preprocess_user_profile(&$vars) {
-	$user = user_load(36);
+	//dpm($vars,'f');
+	$user = $vars['user'];
+	$uid = $user->uid;
+	$roles = $user->roles;
 	
-	//dpm(file_create_url($user->picture->uri, TRUE), 'd');
+	$profile = profile2_load_by_user($user);
+	if (is_array($profile) && count($profile) > 0) {
+		$profile_object = reset($profile);
+		//dpm($profile_object, 'p');
+		//$wrap = entity_metadata_wrapper('Profile', $profile_object);
+		//公司职位
+		$visitorcompany = isset($profile_object->field_visitorcompany[LANGUAGE_NONE])? $profile_object->field_visitorcompany[LANGUAGE_NONE][0]['value']:'';
+		$visitorposition = isset($profile_object->field_visitorposition[LANGUAGE_NONE])? $profile_object->field_visitorposition[LANGUAGE_NONE][0]['value']:'';
+		if ($visitorcompany && $visitorposition) {
+			$visitorcompany .= ' . ';
+		}
+		$visitorcompany .= $visitorposition;		
+		$vars['visitorcompany'] = $visitorcompany;
+		// 投资理念
+		$visitordesc = isset($profile_object->field_visitordesc[LANGUAGE_NONE])? $profile_object->field_visitordesc[LANGUAGE_NONE][0]['value']:'';
+		$vars['visitordesc'] = $visitordesc;
+		// 投资理念
+		$investconcept = isset($profile_object->field_investconcept[LANGUAGE_NONE])? $profile_object->field_investconcept[LANGUAGE_NONE][0]['value']:'';
+		$vars['investconcept'] = $investconcept;
+		// 附加价值
+		$extra_value = isset($profile_object->field_extra_value[LANGUAGE_NONE])? $profile_object->field_extra_value[LANGUAGE_NONE][0]['value']:'';
+		$vars['extra_value'] = $extra_value;
+
+		//擅长的领域
+		if (isset($profile_object->field_knowfield[LANGUAGE_NONE])) {
+			$knowfields = $profile_object->field_knowfield[LANGUAGE_NONE];
+			$know_html = '';
+			foreach ($knowfields as $term) {
+				$know_html .= '<li>' . $term['taxonomy_term']->name . '</li>';
+			}
+			$vars['know_html'] = '<ul class="sclyUl">' . $know_html . '</ul>';
+		} else {
+			$vars['know_html'] = '';
+		}
+		
+		//投资的项目
+		if (isset($profile_object->field_investproject[LANGUAGE_NONE])) {
+			$invest_projects = $profile_object->field_investproject[LANGUAGE_NONE];
+			$projects_html = '';
+			foreach ($invest_projects as $project) {
+				$project['entity']->field_project_logo[LANGUAGE_NONE][0]['path'] = $project['entity']->field_project_logo[LANGUAGE_NONE][0]['uri'];
+				$project['entity']->field_project_logo[LANGUAGE_NONE][0]['style_name'] = 'image_logo';
+				$thumbnail = theme_image_style($project['entity']->field_project_logo[LANGUAGE_NONE][0]);
+				
+				//$image = l($thumbnail, file_create_url($image_path), array('html'=>TRUE, 'attributes' => array('class'=>array('colorbox'), 'type' => $file->filemime, 'target'=>'_blank')));
+				$projects_html .= '<li>' . $thumbnail . '<div class="itemName">' . $project['entity']->title  . '</div> </li>';
+			}
+			$vars['projects_html'] = '<ul class="itemUl">' . $projects_html . '</ul>';
+		} else {
+			$vars['projects_html'] = '';
+		}
+		
+	}
 }
 //add class to buttons
 function bt_button1($variables) {

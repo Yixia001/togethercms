@@ -92,7 +92,7 @@
 		</div>
 		<span><?php if ($title): ?><?php print $title; ?><?php endif; ?></span>
 </div>
-<div class="main-container  container_content">
+<div class="main-container container_content clear">
     <?php print $messages; ?>
     <?php if ($tabs): ?>
         <div class="tabs">
