@@ -1,10 +1,9 @@
-
-
-.userinfo_div{
-	padding: 34px 10px 10px 10px;
+.container{
+	padding: 34px 10px 10px 34px;
 	margin-bottom: 40px;
+	background-color:#fff;
 }
-	.userinfo_div .title{
+	.container .title{
 		font-size: 14px;
 		color: #000;
 		font-weight: bold;
@@ -47,7 +46,7 @@
 			white-space:nowrap;
 			text-overflow:ellipsis;
 		}
-		.userInfo ul{
+		/*.userInfo ul{
 			margin-top: 4px;
 		}
 		.userInfo ul>li{
@@ -74,7 +73,7 @@
 		.userInfo .shoucang{
 			background: url(../images/shoucang.png) no-repeat;
 			background-size:21px 21px;
-		}
+		} */
 
 .itemListZone{
 	padding-bottom: 10px;
@@ -128,7 +127,7 @@
 		font-weight: bold;
 		/* font-size: 14px; */
 		line-height: 14px;
-		/*height: 14px;*/
+		/* height: 14px; */
 		text-align: center;
 		padding: 12px;
 		border-radius: 18px;
@@ -151,3 +150,19 @@
 			
 		}
 		
+
+		.smallIcons{
+
+		}
+			.smallIcons span{
+				font-size: 12px;
+				color: #bbbbbb;
+			}
+			.smallIcons .btn{
+				border: none;
+				padding: 0 6px;
+			}
+			
+			.btnsUl li{
+			width: 25%;
+		}

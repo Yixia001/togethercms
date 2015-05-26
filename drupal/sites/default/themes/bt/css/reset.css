@@ -3,6 +3,10 @@
 /*样式重置,根据自己的网站量身订做,有就加,没有就不用加上去*/
 body,h1,h2,h3,h4,h5,h6,p,dl,dd,ul,ol,form,input,textarea,th,td,select{margin:0;padding:0;}
 em{font-style:normal;}
+ul, ol {
+  margin-top: 0;
+  margin-bottom: 0px;
+}
 li{list-style:none;}
 a{text-decoration:none;}
 img{border:none;vertical-align:top;}/*将img放到a中会有border,给它去掉,同时对齐*/
@@ -37,6 +41,24 @@ body{
 	float: right;
 }
 
+.hid{
+	display: none;
+}
+
+.redBorder{
+	border-color: rgba(255,0,0,0.58);
+}
+.errInfo{
+	color: red;
+	font-size: 12px;
+	margin-bottom: 4px;
+}
+.copyright{
+	height: 30px;
+	background: #ff7518;
+	color:#fff;
+}
+
 .header{
 	height: 48px;
 	background: #141414;
@@ -46,50 +68,24 @@ body{
 	text-align: center;
 	position: relative;
 }
-.footer{
-	
-}
-.btnsUl{
-	position: fixed;
-	width: 100%;
-	bottom: 0;
-	left: 0;
-}
-.btnsUl li{
-	float: left;
-	background: #ef5518;
-	height: 48px;
-	line-height: 48px;
-	text-align: center;
-	width: 25%;
-	cursor: pointer;
-	color: #fff;
-}
-.btnsUl li.active{
-	background: #f88538;
-}
-.container{
-	width:100%;
-	margin:10px 0;
-	padding:0 0 0 0;
-}
-.container_content{
-	width:100%;
-	padding:10px 10px;
-	margin-bottom:40px;
-}
 	.header img{
 		vertical-align: top;
 	}
 	.hleft{
 		position: absolute;
 		top: 0;
-		left: 0;
+		left: 10px;
 		cursor: pointer;
 	}
 	.hright{
 		position: absolute;
 		top: 0;
-		right: 0;
+		right: 10px;
+		cursor: pointer;
+	}
+	.hright2{
+		position: absolute;
+		top: 0;
+		right: 44px;
 		cursor: pointer;
 	}

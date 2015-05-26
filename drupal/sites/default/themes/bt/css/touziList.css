@@ -1,4 +1,7 @@
 
+.container{
+	margin-bottom: 40px;
+}
 .touziUl{
 
 }
@@ -25,8 +28,8 @@
 		margin-right: 20px;
 	}
 	.userInfo .weizhi{
-		background: url(../images/weizhi.png) no-repeat;
-		padding-left: 16px;
+		/* background: url(../img/weizhi.png) no-repeat; 
+		padding-left: 16px;*/
 		background-size:16px 16px;
 	}
 	.userInfo .introduce{
@@ -35,8 +38,8 @@
 		line-height: 30px;
 	}
 	.ly{
-		background: url(../images/weizhi.png) no-repeat;
-		padding-left: 24px;
+		/* background: url(../img/weizhi.png) no-repeat;
+		padding-left: 24px; */
 		background-size:16px 16px;
 
 		/* font-size: 14px; */
@@ -47,5 +50,11 @@
 		white-space:nowrap;
 		text-overflow:ellipsis;
 	}
+		.ly span{
+			margin-right: 5px;
+		}
 
 	
+		.btnsUl li{
+			width: 25%;
+		}

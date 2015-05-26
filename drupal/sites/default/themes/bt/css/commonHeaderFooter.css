@@ -1,0 +1,35 @@
+.head{
+	background: #ef5518;
+	height: 48px;
+	line-height: 48px;
+	position: relative;
+}
+	.head .glyphicon{
+		float: right;
+		height: 48px;
+		line-height: 48px;
+		font-size: 20px;
+		margin-right: 10px;
+		cursor: pointer;
+	}
+
+.btnsUl{
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	z-index: 100;
+}
+	.btnsUl li{
+		float: left;
+		background: #ef5518;
+		height: 48px;
+		line-height: 48px;
+		text-align: center;
+		width: 50%;
+		cursor: pointer;
+		color: #fff;
+	}
+	.btnsUl li.active{
+		background: #f88538;
+	}

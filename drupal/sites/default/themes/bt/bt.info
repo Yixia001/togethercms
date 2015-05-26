@@ -24,11 +24,12 @@ regions[page_bottom]    = 'Page bottom'
 ;; Stylesheets
 ;;;;;;;;;;;;;;;;;;;;;
 
-stylesheets[all][] = css/style.css
+;stylesheets[all][] = css/style.css
 stylesheets[all][] = css/reset.css
-stylesheets[all][] = css/touziList.css
-stylesheets[all][] = css/touziDetail.css
-stylesheets[all][] = css/itemList.css
+stylesheets[all][] = css/commonHeaderFooter.css
+;stylesheets[all][] = css/touziList.css
+;stylesheets[all][] = css/touziDetail.css
+;stylesheets[all][] = css/itemList.css
 
 ; For information on choosing the desired method, please read the Drupal
 ; Bootstrap sub-theme "how-to" documentation:

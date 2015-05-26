@@ -15,6 +15,23 @@ function bt_preprocess(&$vars) {
 	$vars['theme_path'] = $base_url .'/'. path_to_theme();
 }
 
+function bt_preprocess_page(&$vars) {
+	$path = current_path();
+	switch ($path) {
+		case 'projects':
+			drupal_add_css(drupal_get_path('theme', 'bt') . '/css/itemList.css', array('group'=>CSS_THEME));
+			break;
+		case 'partnerlist':
+		case 'investors':
+			drupal_add_css(drupal_get_path('theme', 'bt') . '/css/touziList.css', array('group'=>CSS_THEME));
+			break;
+	}
+	if (isset($vars['user'])) {
+		drupal_add_css(drupal_get_path('theme', 'bt') . '/css/touziDetail.css', array('group'=>CSS_THEME));
+	}
+	//dpm($vars, 'p');
+}
+
 function bt_theme(&$existing, $type, $theme, $path) {
 /*  $hooks['user_login'] = array(
     'template' => 'templates/user/user_login',

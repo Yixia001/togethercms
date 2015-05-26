@@ -75,8 +75,9 @@
 ?>
 
 <div class="header">
-		<div class="hleft">
-			<a href="<?php print $base_path;?>"><img src="<?php print $theme_path?>/images/backBtn.png" alt="首页"></a>
+    
+		<div class="hleft">		  
+			<a href="<?php print $base_path;?>"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>	</a>
 		</div>
 		<div class="hright">
 			<div class="sub_login">
@@ -92,7 +93,18 @@
 		</div>
 		<span><?php if ($title): ?><?php print $title; ?><?php endif; ?></span>
 </div>
-<div class="main-container container_content clear">
+<!-- 
+<div class="header">
+		<span class="hleft">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		</span>
+		<span class="hright">
+			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+		</span>
+		<span>罗月</span>
+	</div>
+	 -->
+<div class="container clear">
     <?php print $messages; ?>
     <?php if ($tabs): ?>
         <div class="tabs">

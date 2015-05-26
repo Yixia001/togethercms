@@ -46,12 +46,29 @@
 				<p class="introduce">
 					<?php print $visitordesc;?>
 				</p>
-				<ul>
+				<!-- <ul>
 					<li class="weizhi"><?php print $user_profile['field_address']['#items'][0]['administrative_area']?>.<?php print $user_profile['field_address']['#items'][0]['locality']?></li>
 					<li class="liaotian">199</li>
 					<li class="liulan">212</li>
 					<li class="shoucang">26</li>
-				</ul>
+				</ul> -->
+				
+				<div class="smallIcons clear">
+					<div class="btn-group fl" role="group">
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><span class="content"><?php print $user_profile['field_address']['#items'][0]['administrative_area']?>.<?php print $user_profile['field_address']['#items'][0]['locality']?></span>
+					 	</button>
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span><span class="content">199</span>
+					  	</button>
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span class="content">212</span>
+					  	</button>
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span><span class="content">26</span>
+					  	</button>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="itemListZone clear">
