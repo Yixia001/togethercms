@@ -32,7 +32,7 @@ function bt_preprocess_page(&$vars) {
 	if (isset($vars['node'])) { //project
 		drupal_add_css(drupal_get_path('theme', 'bt') . '/css/touziDetail.css', array('group'=>CSS_THEME));
 	}
-	//dpm($vars, 'p');
+	
 }
 
 function bt_theme(&$existing, $type, $theme, $path) {
@@ -68,11 +68,9 @@ function bt_preprocess_user_profile_form(&$vars) {
 }
 
 function bt_preprocess_user_profile(&$vars) {
-	//dpm($vars,'f');
-	global $user;
-	$account = $vars['user'];
-	$uid = $user->uid;
-	$roles = $user->roles;
+	global $user;	
+	$account = $vars['elements']['#account'];		
+	
 	if(in_array('partner', $account->roles)) {		
 		if ($user->uid == $account->uid) {
 			$vars['theme_hook_suggestions'][] = 'user_profile__partner__self';
@@ -88,6 +86,8 @@ function bt_preprocess_user_profile(&$vars) {
 		}
 		
 	}
+
+	
 	if(in_array('investor', $account->roles)) {
 		$profile = profile2_load_by_user($account);
 		if (is_array($profile) && count($profile) > 0) {

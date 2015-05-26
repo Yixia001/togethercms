@@ -37,7 +37,7 @@
 ?>
 <div class="userinfo_div">
     <div class="userInfoZone clear">
-			<?php print render($user_profile['user_picture'])?>
+			<?php //print render($user_profile['user_picture'])?>
 			<div class="userInfo">
 				<div class="name"><?php print render($user_profile['field_nikename'])?></div>
 				<p class="job">
