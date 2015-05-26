@@ -1,0 +1,183 @@
+.container{
+	background: #e5e5e5;
+}
+.btnsUl li{
+	width: 25%;
+}
+.typeListUl{
+	overflow: hidden;
+}
+.queryInput{
+	margin: 10px;
+
+}
+#typeListTable  td{
+	text-align: center;
+	cursor: pointer;
+}
+#typeListTable .active{
+	background: #ff7518;
+	color: #fff;
+}
+
+.itemListUl{
+	padding: 10px 6px 50px 6px;
+}
+.itemListUl > li{
+	background: #fff;
+	border-radius: 6px;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+.upPart{
+	padding: 10px 10px 10px 108px;
+	position: relative;
+}
+	.upPart img{
+		width: 80px;
+		height: 80px;
+		border-radius: 6px;
+		position: absolute;
+		top: 10px;
+		left: 10px;
+	}
+	.upPart .name{
+		font-size: 14px;
+		color: #000;
+		font-weight: bold;
+	}
+	.upPart .item{
+		font-size: 12px;
+		color: #959595;
+		line-height: 20px;
+	}
+.jindutiao{
+	background: #e5e5e5;
+	height: 12px;
+	margin: 10px;
+	border-radius: 6px;
+	position: relative;
+	overflow: hidden;
+}
+.curJindu{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 50%;
+	height: 12px;
+	background: #32b16c;
+}
+.rongziInfo{
+	margin: 10px;
+}
+.downPart{
+	background: #f2f2f2;
+	padding: 10px;
+}
+	.downPart .btn{
+		border: none;
+		background: #f2f2f2;
+		padding: 0 6px;
+	}
+
+.filterZone{
+	position: absolute;
+	top: 48px;
+	left: 0;
+	background: #f88538;
+	width:100%;
+	padding: 10px;
+	color: #fff;
+	z-index: 4;
+	height: 300px;
+	overflow: auto;
+	/* border: 1px solid #f88538; */
+}
+	.filterZone .item{
+		position: relative;
+		padding-left: 80px;
+	}
+	.filterZone .item li{
+		float: left;
+		border: 1px solid rgba(40,136,174,.6);
+		margin-right: 10px;
+		margin-bottom: 4px;
+		padding: 2px 6px;
+		border-radius: 6px;
+		cursor: pointer;
+	}
+	.filterZone .item .active{
+		background: #fff;
+		color: #000;
+	}
+	.filterZone .item span{
+		position: absolute;
+		top: 0;
+		left: 25px;
+		height: 27px;
+		line-height: 27px;
+	}
+
+.filterMingQ{
+	position: absolute;
+	top: 48px;
+	left: 0;
+	background: #f88538;
+	width:100%;
+	padding: 22px;
+	color: #fff;
+	z-index: 2;
+	padding-left: 80px;
+}
+	.filterMingQ li{
+		float: left;
+		border: 1px solid rgba(40,136,174,.6);
+		margin-right: 10px;
+		margin-bottom: 4px;
+		padding: 2px 6px;
+		border-radius: 6px;
+		cursor: pointer;
+	}
+	.filterMingQ .active{
+		background: #fff;
+		color: #000;
+	}
+	.filterMingQ  span{
+		position: absolute;
+		top: 20px;
+		left: 14px;
+		height: 27px;
+		line-height: 27px;
+	}
+
+.filterMingX{
+	position: absolute;
+	top: 48px;
+	left: 0;
+	background: #f88538;
+	width:100%;
+	padding: 22px;
+	color: #fff;
+	z-index: 2;
+	padding-left: 80px;
+}
+	.filterMingX li{
+		float: left;
+		border: 1px solid rgba(40,136,174,.6);
+		margin-right: 10px;
+		margin-bottom: 4px;
+		padding: 2px 6px;
+		border-radius: 6px;
+		cursor: pointer;
+	}
+	.filterMingX .active{
+		background: #fff;
+		color: #000;
+	}
+	.filterMingX  span{
+		position: absolute;
+		top: 20px;
+		left: 14px;
+		height: 27px;
+		line-height: 27px;
+	}

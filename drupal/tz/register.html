@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="format-detection" content="email=no">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="Expires" content="0">
+	<title>注册页</title>
+	<link rel="stylesheet" href="./css/bootstrap.min.css">
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/commonHeaderFooter.css">
+	<link rel="stylesheet" href="./css/register.css">
+</head>
+<body>
+	<div class="head">
+		<span class="glyphicon glyphicon-cog config" aria-hidden="true"></span>
+		<span class="glyphicon glyphicon-list itemList" aria-hidden="true"></span>
+		<span class="glyphicon glyphicon-user userList" aria-hidden="true"></span>
+	</div>
+	<div class="container">
+		<div class="title">新用户注册</div>
+		<div class="phoneNoErrInfo errInfo hid">请输入正确的手机号码</div>
+		<div class="input-group">
+	      	<span class="input-group-addon glyphicon glyphicon-phone addon-glyphicon"></span>
+	      	<input type="text" class="form-control phoneNo" placeholder="请输入11位手机号码" name="phoneNo">
+	    </div>
+	    <div class="submitNoErrInfo errInfo hid">请输入正确的验证码</div>
+	    <div class="input-group">
+		  	<input type="text" class="form-control submitNo" placeholder="请输入手机获取的验证码" aria-describedby="basic-addon2">
+		  	<span class="input-group-btn">
+	        	<button class="btn btn-default" type="button">重新发送验证码</button>
+	      	</span>
+		</div>
+		<div class="usernameErrInfo errInfo hid">用户名不能为空||该用户名已存在</div>
+	    <div class="input-group">
+	      	<span class="input-group-addon glyphicon glyphicon-lock addon-glyphicon"></span>
+	      	<input type="text" class="form-control username" placeholder="请输入用户名" name="username">
+	    </div>
+	    <div class="passwordErrInfo errInfo hid">密码长度为6到12位</div>
+	    <div class="input-group">
+	      	<span class="input-group-addon glyphicon glyphicon-lock addon-glyphicon"></span>
+	      	<input type="password" class="form-control password" placeholder="请输入密码" name="password">
+	    </div>
+	    <div class="btn-group" data-toggle="buttons">
+		   	<label class="thelabel">
+		   	我是
+		 	</label> 
+
+		  	<label class="btn btn-default">
+		    	<input type="radio" name="options" id="option2" autocomplete="off">投资人
+		  	</label>
+		  	<label class="btn btn-default">
+		    	<input type="radio" name="options" id="option3" autocomplete="off">创业者
+		  	</label>
+		</div>
+		<div class="thecheckbox">
+			<input type="checkbox" class="agreeYesOrNo" name="agreeYesOrNo">我已阅读并同意<span>《萌牙创投服务协议》</span>
+		</div>
+	    <button type="button" class="btn btn-primary btn-block registerBtn">完成</button>
+	</div>
+
+	<script src="./js/jquery-1.9.1.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/common.js"></script>
+	<script src="./js/commonHeader.js"></script>
+	<script src="./js/register.js"></script>
+</body>
+</html>
