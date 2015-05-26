@@ -1,0 +1,39 @@
+<?php
+require_once dirname ( __FILE__ ) . '/manage_account.api.inc';
+
+
+/**
+ * Implement hook_form_alter().
+ */
+function manage_account_form_alter(&$form, &$form_state, $form_id) {
+	if ($form_id == 'user_login') {
+		//$form ['name'] ['#title_display'] = 'invisible';
+		//$form ['pass'] ['#title_display'] = 'invisible';
+		drupal_set_title(t('登录'));
+		unset($form['name']['#description']);
+		unset($form['pass']['#description']);
+	}
+	if ($form_id == 'user_register_form' || $form_id == 'user_profile_form') {
+		$form['account']['pass']['#type'] = 'password';
+		$form['account']['pass']['#title'] = t('Password');
+		unset($form['account']['mail']['#description']);
+	  unset($form['account']['pass']['#description']);
+		if ($form_id == 'user_register_form') {
+			//$form['account']['mail']['#title_display'] = 'invisible';
+			//$form['account']['pass']['#title_display'] = 'invisible';
+			hide($form['field_address']);
+			drupal_set_title(t('注册'));
+		}
+		if ($form_id == 'user_profile_form') {
+			//hide($form['account']['mail']);
+			hide($form['account']['pass']);
+			hide($form['account']['current_pass']);
+			hide($form['account']['current_pass_required_values']);
+			hide($form['account']['mail']);
+			hide($form['locale']);
+			hide($form['flag_friend']);
+			
+			//$form['account']['pass']['#title_display'] = 'invisible';
+		}
+	}
+}

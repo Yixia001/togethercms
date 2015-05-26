@@ -1,0 +1,5 @@
+name = Manage account
+description = "Manage account"
+package = "Together"
+core = 7.x
+files[] = manage_account.module
