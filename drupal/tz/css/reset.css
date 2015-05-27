@@ -43,6 +43,22 @@ body{
 .redBorder{
 	border-color: rgba(255,0,0,0.58);
 }
+.color_ff842e{
+	color: #ff842e;
+}
+.color_green{
+	color: green;
+}
+.bold{
+	font-weight: bold;
+}
+.noborderbottom{
+	border-bottom: none !important;
+}
+.marginleftright20{
+	margin: 0 20px;
+}
+
 .errInfo{
 	color: red;
 	font-size: 12px;

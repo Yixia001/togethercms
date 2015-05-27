@@ -42,18 +42,7 @@
 					<div><?php print $fields['friend_link']->content?></div>
 				</div>
 </li>
-<div style="display:none;">
-<div class="user_basic">
-<div class="user_basic_photo">
-<?php print $fields['picture']->content?>
-</div>
-<div class="user_basic_text">
-<div class="user_basic_name">
-<?php print $fields['field_nikename']->content?>
-</div>
-<div class="user_basic_city">
-<?php print $fields['field_address_locality']->content?>
-</div>
+<!--  
 <div class="user_basic_role">
 <?php print $fields['field_role_type']->content?>
 </div>
@@ -79,3 +68,5 @@
 <?php print $fields['friend_link']->content?><br>
 <a href="/rychat/<?php print $row->uid?>" target="_blank">联系合伙人</a>
 </div>
+
+-->

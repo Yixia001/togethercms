@@ -30,3 +30,8 @@ function main_init() {
 		return;
 	}
 }
+
+function main_preprocess_feedback_simple(&$variables) {
+	// Add .automodal class.
+	$variables['class'][] = 'automodal';
+}

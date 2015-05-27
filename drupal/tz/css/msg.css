@@ -1,0 +1,21 @@
+.userInfo{
+	position: relative;
+}
+.userInfo .time{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.touziUl li{
+	border-bottom: 1px solid #ccc;
+}
+
+.userInfo .introduce{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.touziUl img{
+	width: 55px;
+	height: 55px;
+}
