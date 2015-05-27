@@ -33,7 +33,7 @@
 						<span class="weizhi"><?php print $fields['field_address_locality']->content?></span>
 					</div>
 					<div class="introduce">
-						<?php print $fields['field_role_type']->content?>
+						
 					</div>
 					<div class="ly">
 						互联网金融/O2O/智能硬件/互联网金融
