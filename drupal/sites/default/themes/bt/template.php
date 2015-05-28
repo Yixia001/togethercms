@@ -36,15 +36,13 @@ function bt_preprocess_page(&$vars) {
 }
 
 function bt_theme(&$existing, $type, $theme, $path) {
-/*  $hooks['user_login'] = array(
+  $hooks['user_login'] = array(
     'template' => 'templates/user/user_login',
     'render element' => 'form',
-    // other theme registration code...
-  );*/
-  $hooks['user_register_form1'] = array(
+  );
+  $hooks['user_register_form'] = array(
   		'template' => 'templates/user/user_register_form',
   		'render element' => 'form',
-  		// other theme registration code...
   );
   $hooks['user_profile_form'] = array(
     'render element' => 'form',
@@ -56,10 +54,14 @@ function bt_theme(&$existing, $type, $theme, $path) {
  
 
 function bt_preprocess_user_login(&$var) {
-	
+	drupal_add_css(drupal_get_path('theme', 'bt') . '/css/login.css', array('group'=>CSS_THEME));
   //$variables['intro_text'] = t('This is my awesome login form');
-  //$var['form']['name']['#attributes']['class'][] = 'input-prepend';
-  //dpm($var, 'dvvvv');
+	$var['form']['name']['#title_display'] = 'invisible';
+	unset($var['form']['name']['#description']);
+  $var['form']['name']['#attributes']['placeholder'] = t('请输入11位手机号码');
+  $var['form']['pass']['#title_display'] = 'invisible';
+  unset($var['form']['pass']['#description']);
+  dpm($var, 'dvvvv');
   ///$variables['rendered'] = drupal_render_children($variables['form']);
 }
 

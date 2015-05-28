@@ -255,3 +255,25 @@
 	float: left;
 	margin-right: 1px;
 }
+
+.btn4s .btn{
+	border: none;
+	background: #fff;
+	padding: 0 6px;
+	font-size: 12px;
+	color: #bababa;
+}
+.thetitle{
+	position: relative;
+}
+.thetitle strong{
+	font-size: 14px;
+}
+.thetitle span{
+	position: absolute;
+	top: 0;
+	right: 0px;
+	height: 20px;
+	line-height: 20px;
+	color: #bababa;
+}
