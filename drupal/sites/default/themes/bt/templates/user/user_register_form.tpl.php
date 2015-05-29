@@ -1,4 +1,7 @@
 
+    <?php print drupal_render_children($form) ?>
+ 
+
 <div class="title">新用户注册</div>
 		<div class="phoneNoErrInfo errInfo hid">请输入正确的手机号码</div>
 		<div class="input-group">
