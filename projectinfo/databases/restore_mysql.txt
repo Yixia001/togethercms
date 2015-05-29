@@ -1,6 +1,6 @@
 mysql -uroot -proot -e "drop database if exists togetherdb"
 mysql -uroot -proot -e "create database if not exists togetherdb"
-mysql -uroot -proot -e "source togetherdb1.sql" togetherdb
+mysql -uroot -proot -e "source togetherdb150527.sql" togetherdb
 
 
 mysql -uroot -pancaixia -e "drop database if exists togetherdb"
@@ -9,7 +9,19 @@ mysql -uroot -pancaixia -e "source togetherdb1.sql" togetherdb
 
 mysql -uroot -pancaixia -e "drop database if exists grabdb"
 mysql -uroot -pancaixia -e "create database if not exists grabdb"
-mysql -uroot -pancaixia -e "source grab.sql" grabdb
+mysql -uroot -pancaixia -e "source proj_tsh.sql" grabdb
 
+mysql -uroot -proot -e "drop database if exists grabdb"
+mysql -uroot -proot -e "create database if not exists grabdb"
+mysql -uroot -proot -e "source proj_tsh.sql" grabdb
 
 grant all privileges on grabdb.* to tadmin@'%' identified by 'menya123' ;
+
+
+mgb7ka1nb57jg
+ 
+BPE8wp6boLi7
+
+menya
+vnroth0krcaco
+jDEEfqwW8Al

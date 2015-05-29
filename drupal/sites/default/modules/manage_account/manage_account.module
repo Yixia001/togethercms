@@ -19,9 +19,18 @@ function manage_account_form_alter(&$form, &$form_state, $form_id) {
 		unset($form['account']['mail']['#description']);
 	  unset($form['account']['pass']['#description']);
 		if ($form_id == 'user_register_form') {
-			//$form['account']['mail']['#title_display'] = 'invisible';
-			//$form['account']['pass']['#title_display'] = 'invisible';
-			hide($form['field_address']);
+			unset($form['account']['name']['#description']);
+			$form['account']['name']['#title_display'] = 'invisible';
+			$form['account']['name']['#attributes']['placeholder'] = t('请输入11位手机号码');
+			hide($form['account']['mail']);
+			//unset($form['account']['mail']['#required']);
+			$form['account']['pass']['#title_display'] = 'invisible';
+			$form['account']['pass']['#attributes']['placeholder'] = t('请输入密码');
+			$form['field_real_name'][LANGUAGE_NONE][0]['value']['#title_display'] = 'invisible';
+			$form['field_real_name'][LANGUAGE_NONE][0]['value']['#attributes']['placeholder'] = t('请输入用户名');
+			$form['actions']['submit']['#attributes']['class'] = array('btn-primary', 'btn-block', 'loginBtn');
+			//dpm($form, 'd');
+			//hide($form['field_address']);
 			drupal_set_title(t('注册'));
 		}
 		if ($form_id == 'user_profile_form') {
@@ -29,7 +38,7 @@ function manage_account_form_alter(&$form, &$form_state, $form_id) {
 			hide($form['account']['pass']);
 			hide($form['account']['current_pass']);
 			hide($form['account']['current_pass_required_values']);
-			hide($form['account']['mail']);
+			//hide($form['account']['mail']);
 			hide($form['locale']);
 			hide($form['flag_friend']);
 			
