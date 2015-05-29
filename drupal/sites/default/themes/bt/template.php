@@ -61,8 +61,20 @@ function bt_preprocess_user_login(&$var) {
   $var['form']['name']['#attributes']['placeholder'] = t('请输入11位手机号码');
   $var['form']['pass']['#title_display'] = 'invisible';
   unset($var['form']['pass']['#description']);
-  dpm($var, 'dvvvv');
   ///$variables['rendered'] = drupal_render_children($variables['form']);
+  $var['form']['actions']['submit']['#attributes']['class'] = array('btn-primary', 'btn-block', 'loginBtn');
+  
+}
+
+function bt_preprocess_user_register_form(&$var) {
+	drupal_add_css(drupal_get_path('theme', 'bt') . '/css/register.css', array('group'=>CSS_THEME));
+	//$variables['intro_text'] = t('This is my awesome login form');
+	$var['form']['name']['#title_display'] = 'invisible';
+	unset($var['form']['name']['#description']);
+	$var['form']['name']['#attributes']['placeholder'] = t('请输入11位手机号码');
+	$var['form']['pass']['#title_display'] = 'invisible';
+	unset($var['form']['pass']['#description']);
+	///$variables['rendered'] = drupal_render_children($variables['form']);
 }
 
 function bt_preprocess_user_profile_form(&$vars) {		
