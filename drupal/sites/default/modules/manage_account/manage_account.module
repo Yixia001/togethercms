@@ -75,5 +75,11 @@ function manage_account_register_validate(&$form, &$form_state) {
 }
 
 function manage_account_register_submit(&$form, &$form_state) {
-	
+	$role = $form_state['values']['role'];
+	if ($role == ROLE_INVESTOR) {
+		drupal_goto('projects');
+	}
+	if ($role == ROLE_PARTNER) {
+		drupal_goto('investors');
+	}
 }
