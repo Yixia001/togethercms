@@ -1235,7 +1235,7 @@ function user_account_form_validate($form, &$form_state) {
         form_set_error('name', $error);
       }
       elseif ((bool) db_select('users')->fields('users', array('uid'))->condition('uid', $account->uid, '<>')->condition('name', db_like($form_state['values']['name']), 'LIKE')->range(0, 1)->execute()->fetchField()) {
-        form_set_error('name', t('The name %name is already taken.', array('%name' => $form_state['values']['name'])));
+        form_set_error('name', t('电话 %name 注册过.', array('%name' => $form_state['values']['name'])));
       }
     }
 
