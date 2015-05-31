@@ -31,11 +31,24 @@
 		line-height: 34px;
 		margin-right: 11px;
 	}
+	.btn .radio .control-label {
+	   padding-left:0;
+	}
+	.btn-group .btn  input[type="radio"]{
+	 // clip: auto;
+	}
+	.input-group-addon{
+	  height:34px;
+	}
 	.thecheckbox{
-		margin-top: 2px;
+		margin-top: 10px;
 		margin-bottom: 20px;
 		position: relative;
-		padding-left: 24px;
+	}
+	
+	.thecheckbox input[type="checkbox"]{
+	  margin-top:2px;
+	  margin-right:5px;
 	}
 		.thecheckbox span{
 			color: red;

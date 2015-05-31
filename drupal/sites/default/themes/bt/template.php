@@ -68,9 +68,11 @@ function bt_preprocess_user_login(&$var) {
 
 function bt_preprocess_user_register_form(&$var) {
 	drupal_add_css(drupal_get_path('theme', 'bt') . '/css/register.css', array('group'=>CSS_THEME));
+	drupal_add_js(drupal_get_path('theme', 'bt') . '/js/register.js', array('group'=>CSS_THEME));
 	//$variables['intro_text'] = t('This is my awesome login form');
 	
 	///$variables['rendered'] = drupal_render_children($variables['form']);
+//	$var['form']['role'][6]['#title_display'] = 'none';
 	//dpm($var['form'], 'x');
 }
 
@@ -235,73 +237,15 @@ function bt_password1($variables) {
 
 /** Theme form element **/
 function bt_form_element1($variables) {
-	$element = &$variables['element'];
+$element = &$variables['element'];
 
-	// This function is invoked as theme wrapper, but the rendered form element
-	// may not necessarily have been processed by form_builder().
-	$element += array(
-			'#title_display' => 'before',
-	);
+  // If #title is not set, we don't display any label or required marker.
+  if (!isset($element['#title']) || empty($element['#title'])) {
+    $element['#title_display'] = 'none';
+  }
+  
+  return theme_form_element($variables);
 
-	// Add element #id for #type 'item'.
-	if (isset($element['#markup']) && !empty($element['#id'])) {
-		$attributes['id'] = $element['#id'];
-	}
-	// Add element's #type and #name as class to aid with JS/CSS selectors.
-	$attributes['class'] = array('form-item');
-	if (!empty($element['#type'])) {
-		$attributes['class'][] = 'form-type-' . strtr($element['#type'], '_', '-');
-	}
-	if (!empty($element['#name'])) {
-		$attributes['class'][] = 'form-item-' . strtr($element['#name'], array(' ' => '-', '_' => '-', '[' => '-', ']' => ''));
-	}
-	// Add a class for disabled elements to facilitate cross-browser styling.
-	if (!empty($element['#attributes']['disabled'])) {
-		$attributes['class'][] = 'form-disabled';
-	}
-	if (isset($element['#parents']) && form_get_error($element)) {
-		$attributes['class'][] = 'has-error';
-	}
-
-	if($element['#type'] != 'radio'){
-		$attributes['class'][] = 'input-group';
-	}
-
-	$output = '<div' . drupal_attributes($attributes) . '>' . "\n";
-
-	// If #title is not set, we don't display any label or required marker.
-	if (!isset($element['#title'])) {
-		$element['#title_display'] = 'none';
-	}
-	$prefix = isset($element['#field_prefix']) ? '<span class="field-prefix">' . $element['#field_prefix'] . '</span> ' : '';
-	$suffix = isset($element['#field_suffix']) ? ' <span class="field-suffix">' . $element['#field_suffix'] . '</span>' : '';
-
-	switch ($element['#title_display']) {
-		case 'before':
-		case 'invisible':
-			$output .= ' ' . theme('form_element_label', $variables);
-			$output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
-			break;
-
-		case 'after':
-			$output .= ' ' . $prefix . $element['#children'] . $suffix;
-			$output .= ' ' . theme('form_element_label', $variables) . "\n";
-			break;
-
-		case 'none':
-		case 'attribute':
-			// Output no label and no required marker, only the children.
-			$output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
-			break;
-	}
-	// remove description we'll use placeholder.
-	if (!empty($element['#description'])) {
-		//$output .= '<div class="description">' . $element['#description'] . "</div>\n";
-	}
-
-	$output .= "</div>\n";
-
-	return $output;
 }
 
 /**
