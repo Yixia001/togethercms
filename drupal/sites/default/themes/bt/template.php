@@ -26,7 +26,8 @@ function bt_preprocess_page(&$vars) {
 			drupal_add_css(drupal_get_path('theme', 'bt') . '/css/touziList.css', array('group'=>CSS_THEME));
 			break;
 	}
-	if (isset($vars['user'])) {
+	
+	if (strpos($path, 'user') === 0 && is_numeric(arg(1))) {
 		drupal_add_css(drupal_get_path('theme', 'bt') . '/css/touziDetail.css', array('group'=>CSS_THEME));
 	}
 	if (isset($vars['node'])) { //project
