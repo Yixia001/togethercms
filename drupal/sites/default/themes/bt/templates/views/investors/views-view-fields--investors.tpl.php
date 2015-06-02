@@ -44,4 +44,3 @@
 <?php print $fields['ops']->content?><br>
 <?php print $fields['friend_link']->content?><br>
 <a href="/rychat/<?php print $row->uid?>" target="_blank">联系合伙人</a>
-</div>
