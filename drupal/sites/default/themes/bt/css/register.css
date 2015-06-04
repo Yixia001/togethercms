@@ -59,3 +59,10 @@
 			top: -2px;
 			left: 0;
 		}
+.user_profile{
+	float:left;
+	padding-bottom:50px;
+}
+.btnsUl li{
+	width: 25%;
+}
