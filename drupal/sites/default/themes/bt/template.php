@@ -86,6 +86,9 @@ function bt_preprocess_user_register_form(&$var) {
 	// dpm($var['form'], 'x');
 }
 function bt_preprocess_user_profile_form(&$vars) {
+	drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/useredit.css', array (
+			'group' => CSS_THEME
+	) );
 	unset ( $vars ['form'] ['group_basic'] ['field_gender'] [LANGUAGE_NONE] ['_none'] );
 }
 function bt_preprocess_user_profile(&$vars) {

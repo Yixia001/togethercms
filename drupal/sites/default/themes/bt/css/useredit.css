@@ -1,0 +1,14 @@
+.btnsUl li{
+	width: 25%;
+}
+.userinfoself_div .img-responsive{
+	display:inline;
+}
+.user_profile{
+	float:left;
+	padding-bottom:50px;
+}
+.user_profile #edit-field-address{
+	width:100%;
+	clear:both;
+}
