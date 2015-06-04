@@ -1,0 +1,63 @@
+.thecontainer{
+	margin-bottom: 48px;
+}
+.photoZone{
+	height: 100px;
+	padding-top: 20px;
+	margin-bottom: 4px;
+}
+	.photoZone .photo{
+		text-align: center;
+		font-weight: bold;
+	}
+		.photoZone .photo img{
+			width: 60px;
+			height: 60px;
+			border: 1px solid #000;
+			padding: 3px;
+			border-radius: 50%;
+			margin-bottom: 4px;
+		}
+.menuZone{
+
+}
+	.menuZone ul li{
+		float: left;
+		width: 33%;
+		text-align: center;
+		background: #000;
+		color: #fff;
+		border-left: 1px solid #ccc;
+		padding: 4px 0;
+	}
+		.menuZone .num{
+			font-weight: bold;
+			font-size: 14px;
+		}
+		.menuZone .subject{
+			color: #A6A1A1;
+		}
+
+.contentZone{
+	margin: 0 10px;
+}
+	.contentZone li{
+		padding: 10px 10px 10px 20px;
+		border-bottom: 1px solid #ccc;
+
+	}
+	.contentZone .title_item{
+		background: #ccc;
+		height: 40px;
+		line-height: 40px;
+		padding: 0;
+		padding-left: 20px;
+		font-size: 14px;
+		font-weight: bold;
+	}
+.glyphicon-chevron-right{
+	cursor: pointer;
+}
+.huifont{
+	color: rgb(201, 202, 180);
+}

@@ -35,80 +35,88 @@
  */
 
 ?>
-<div class="userinfo_div">
-    <div class="userInfoZone clear">
-			<?php print render($user_profile['user_picture'])?>
-			<div class="userInfo">
-				<div class="name"><?php print render($user_profile['field_nikename'])?></div>
-				<p class="job">
-					<?php print $visitorcompany;?>
-				</p>
-				<p class="introduce">
-					<?php print $visitordesc;?>
-				</p>
-				<!-- <ul>
-					<li class="weizhi"><?php print $user_profile['field_address']['#items'][0]['administrative_area']?>.<?php print $user_profile['field_address']['#items'][0]['locality']?></li>
-					<li class="liaotian">199</li>
-					<li class="liulan">212</li>
-					<li class="shoucang">26</li>
-				</ul> -->
-				
-				<div class="smallIcons clear">
-					<div class="btn-group fl" role="group">
-					  	<button type="button" class="btn btn-default">
-					  		<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><span class="content"><?php print $user_profile['field_address']['#items'][0]['administrative_area']?>.<?php print $user_profile['field_address']['#items'][0]['locality']?></span>
-					 	</button>
-					  	<button type="button" class="btn btn-default">
-					  		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span><span class="content">199</span>
-					  	</button>
-					  	<button type="button" class="btn btn-default">
-					  		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span class="content">212</span>
-					  	</button>
-					  	<button type="button" class="btn btn-default">
-					  		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span><span class="content">26</span>
-					  	</button>
-					</div>
-				</div>
+<div class="userinfoself_div">
+    <div class="photoZone">
+			<div class="photo">
+				<?php print render($user_profile['user_picture'])?>
+				<div><?php print render($user_profile['field_nikename'])?></div>
 			</div>
 		</div>
-		<div class="itemListZone clear">
-			<div class="title">投资项目：</div>
-			<?php print $projects_html;?>
-		</div>
-		<div class="tzln">
-			<div class="title">投资理念：</div>
-			<p>
-				<?php print $investconcept;?>
-			</p>
-		</div>
-		<div class="scly clear">
-			<div class="title">擅长领域：</div>
-			<?php print $know_html;?>
-		</div>
-		<div class="fjjz">
-			<div class="title">附加价值：</div>
-			<p>
-				<?php print $extra_value;?>
-			</p>
-		</div>
-		<div class="taGZ">
-			<div class="title">TA关注：</div>
-			<ul class="itemUl">
+		<div class="menuZone">
+			<ul class="clear">
 				<li>
-					<img src="./img/2.jpg" alt="">
-					<div class="itemName">北斗天使</div>
+					<div class="num">1</div>
+					<div class="subject">约谈</div>
 				</li>
 				<li>
-					<img src="./img/2.jpg" alt="">
-					<div class="itemName">北斗天使北斗天使</div>
+					<div class="num">6</div>
+					<div class="subject">关注</div>
 				</li>
 				<li>
-					<img src="./img/2.jpg" alt="">
-					<div class="itemName">北斗天使</div>
+					<div class="num">2</div>
+					<div class="subject">粉丝</div>
 				</li>
-				<li>
-					<img src="./img/2.jpg" alt="">
-					<div class="itemName">北斗天使</div>
+			</ul>
+		</div>
+		<div class="contentZone">
+			<ul>
+				<li class="clear">
+					<div class="fl">
+						<span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
+						<strong>投资人认证</strong>
+					</div>
+					<div class="fr">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					</div>
+					<div class="fr">未认证</div>
+				</li>
+				<a href="<?php print $preference_setting_url;?>">
+				<li class="clear">
+					<div class="fl">
+						<span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>
+						<strong>投资偏好</strong>
+					</div>
+					<div class="fr">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					</div>
+					<div class="fr">已设置</div>
+				</li>
+				</a>
+				<li class="clear">
+					<div class="fl">
+						<span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
+						<strong>投融须知</strong>
+					</div>
+					<div class="fr">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					</div>
+				</li>
+				<li class="clear">
+					<div class="fl">
+						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+						<strong>反馈建议</strong>
+					</div>
+					<div class="fr">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					</div>
+				</li>
+				<li class="clear">
+					<div class="fl">
+						<span class="glyphicon glyphicon-share" aria-hidden="true"></span>
+						<strong>推荐给好友</strong>
+					</div>
+					<div class="fr">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					</div>
+				</li>
+				<li class="clear">
+					<div class="fl">
+						<span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>
+						<strong>我的人脉</strong>
+					</div>
+					<div class="fr">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					</div>
 				</li>
 			</ul>
 		</div>

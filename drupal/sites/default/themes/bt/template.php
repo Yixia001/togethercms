@@ -31,9 +31,7 @@ function bt_preprocess_page(&$vars) {
 	}
 	
 	if (strpos ( $path, 'user' ) === 0 && is_numeric ( arg ( 1 ) )) {
-		drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/touziDetail.css', array (
-				'group' => CSS_THEME 
-		) );
+		
 	}
 	if (isset ( $vars ['node'] )) { // project
 		drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/touziDetail.css', array (
@@ -101,66 +99,76 @@ function bt_preprocess_user_profile(&$vars) {
 		}
 	} elseif (in_array ( 'investor', $account->roles )) {
 		if ($user->uid == $account->uid) {
+			drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/touzirenConf.css', array (
+					'group' => CSS_THEME
+			) );
 			$vars ['theme_hook_suggestions'] [] = 'user_profile__investor__self';
 		} else {
+			drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/touziDetail.css', array (
+					'group' => CSS_THEME
+			) );
 			$vars ['theme_hook_suggestions'] [] = 'user_profile__investor';
 		}
 	}
 	
 	if (in_array ( 'investor', $account->roles )) {
-		$profile_object = profile2_load_by_user ( $account, 'investor_profile' );
-		// $profile = profile2_load_by_user($account, 'basic_profile');
-		// $profile = profile2_load_by_user($account, 'preference_setting');
-		// dpm($profile_object, 'p');
-		// $wrap = entity_metadata_wrapper('Profile', $profile_object);
-		// 公司职位
-		$visitorcompany = isset ( $profile_object->field_visitorcompany [LANGUAGE_NONE] ) ? $profile_object->field_visitorcompany [LANGUAGE_NONE] [0] ['value'] : '';
-		$visitorposition = isset ( $profile_object->field_visitorposition [LANGUAGE_NONE] ) ? $profile_object->field_visitorposition [LANGUAGE_NONE] [0] ['value'] : '';
-		if ($visitorcompany && $visitorposition) {
-			$visitorcompany .= ' . ';
-		}
-		$visitorcompany .= $visitorposition;
-		$vars ['visitorcompany'] = $visitorcompany;
-		// 投资理念
-		$visitordesc = isset ( $profile_object->field_visitordesc [LANGUAGE_NONE] ) ? $profile_object->field_visitordesc [LANGUAGE_NONE] [0] ['value'] : '';
-		$vars ['visitordesc'] = $visitordesc;
-		// 投资理念
-		$investconcept = isset ( $profile_object->field_investconcept [LANGUAGE_NONE] ) ? $profile_object->field_investconcept [LANGUAGE_NONE] [0] ['value'] : '';
-		$vars ['investconcept'] = $investconcept;
-		// 附加价值
-		$extra_value = isset ( $profile_object->field_extra_value [LANGUAGE_NONE] ) ? $profile_object->field_extra_value [LANGUAGE_NONE] [0] ['value'] : '';
-		$vars ['extra_value'] = $extra_value;
-		
-		// 擅长的领域
-		if (isset ( $profile_object->field_knowfield [LANGUAGE_NONE] )) {
-			$knowfields = $profile_object->field_knowfield [LANGUAGE_NONE];
-			$know_html = '';
-			foreach ( $knowfields as $term ) {
-				if (! isset ( $term ['taxonomy_term'] )) {
-					$term ['taxonomy_term'] = taxonomy_term_load ( $term ['tid'] );
+		if ($user->uid != $account->uid) {
+			$profile_object = profile2_load_by_user ( $account, 'investor_profile' );
+			// $profile = profile2_load_by_user($account, 'basic_profile');
+			// $profile = profile2_load_by_user($account, 'preference_setting');
+			// dpm($profile_object, 'p');
+			// $wrap = entity_metadata_wrapper('Profile', $profile_object);
+			// 公司职位
+			$visitorcompany = isset ( $profile_object->field_visitorcompany [LANGUAGE_NONE] ) ? $profile_object->field_visitorcompany [LANGUAGE_NONE] [0] ['value'] : '';
+			$visitorposition = isset ( $profile_object->field_visitorposition [LANGUAGE_NONE] ) ? $profile_object->field_visitorposition [LANGUAGE_NONE] [0] ['value'] : '';
+			if ($visitorcompany && $visitorposition) {
+				$visitorcompany .= ' . ';
+			}
+			$visitorcompany .= $visitorposition;
+			$vars ['visitorcompany'] = $visitorcompany;
+			// 投资理念
+			$visitordesc = isset ( $profile_object->field_visitordesc [LANGUAGE_NONE] ) ? $profile_object->field_visitordesc [LANGUAGE_NONE] [0] ['value'] : '';
+			$vars ['visitordesc'] = $visitordesc;
+			// 投资理念
+			$investconcept = isset ( $profile_object->field_investconcept [LANGUAGE_NONE] ) ? $profile_object->field_investconcept [LANGUAGE_NONE] [0] ['value'] : '';
+			$vars ['investconcept'] = $investconcept;
+			// 附加价值
+			$extra_value = isset ( $profile_object->field_extra_value [LANGUAGE_NONE] ) ? $profile_object->field_extra_value [LANGUAGE_NONE] [0] ['value'] : '';
+			$vars ['extra_value'] = $extra_value;
+			
+			// 擅长的领域
+			if (isset ( $profile_object->field_knowfield [LANGUAGE_NONE] )) {
+				$knowfields = $profile_object->field_knowfield [LANGUAGE_NONE];
+				$know_html = '';
+				foreach ( $knowfields as $term ) {
+					if (! isset ( $term ['taxonomy_term'] )) {
+						$term ['taxonomy_term'] = taxonomy_term_load ( $term ['tid'] );
+					}
+					$know_html .= '<li>' . $term ['taxonomy_term']->name . '</li>';
 				}
-				$know_html .= '<li>' . $term ['taxonomy_term']->name . '</li>';
+				$vars ['know_html'] = '<ul class="sclyUl">' . $know_html . '</ul>';
+			} else {
+				$vars ['know_html'] = '';
 			}
-			$vars ['know_html'] = '<ul class="sclyUl">' . $know_html . '</ul>';
-		} else {
-			$vars ['know_html'] = '';
-		}
-		
-		// 投资的项目
-		if (isset ( $profile_object->field_investproject [LANGUAGE_NONE] )) {
-			$invest_projects = $profile_object->field_investproject [LANGUAGE_NONE];
-			$projects_html = '';
-			foreach ( $invest_projects as $project ) {
-				$project ['entity']->field_project_logo [LANGUAGE_NONE] [0] ['path'] = $project ['entity']->field_project_logo [LANGUAGE_NONE] [0] ['uri'];
-				$project ['entity']->field_project_logo [LANGUAGE_NONE] [0] ['style_name'] = 'image_logo';
-				$thumbnail = theme_image_style ( $project ['entity']->field_project_logo [LANGUAGE_NONE] [0] );
-				
-				// $image = l($thumbnail, file_create_url($image_path), array('html'=>TRUE, 'attributes' => array('class'=>array('colorbox'), 'type' => $file->filemime, 'target'=>'_blank')));
-				$projects_html .= '<li>' . $thumbnail . '<div class="itemName">' . $project ['entity']->title . '</div> </li>';
+			
+			// 投资的项目
+			if (isset ( $profile_object->field_investproject [LANGUAGE_NONE] )) {
+				$invest_projects = $profile_object->field_investproject [LANGUAGE_NONE];
+				$projects_html = '';
+				foreach ( $invest_projects as $project ) {
+					$project ['entity']->field_project_logo [LANGUAGE_NONE] [0] ['path'] = $project ['entity']->field_project_logo [LANGUAGE_NONE] [0] ['uri'];
+					$project ['entity']->field_project_logo [LANGUAGE_NONE] [0] ['style_name'] = 'image_logo';
+					$thumbnail = theme_image_style ( $project ['entity']->field_project_logo [LANGUAGE_NONE] [0] );
+					
+					// $image = l($thumbnail, file_create_url($image_path), array('html'=>TRUE, 'attributes' => array('class'=>array('colorbox'), 'type' => $file->filemime, 'target'=>'_blank')));
+					$projects_html .= '<li>' . $thumbnail . '<div class="itemName">' . $project ['entity']->title . '</div> </li>';
+				}
+				$vars ['projects_html'] = '<ul class="itemUl">' . $projects_html . '</ul>';
+			} else {
+				$vars ['projects_html'] = '';
 			}
-			$vars ['projects_html'] = '<ul class="itemUl">' . $projects_html . '</ul>';
-		} else {
-			$vars ['projects_html'] = '';
+		} else { //touziren self
+			$vars['preference_setting_url'] = '/user/' . $user->uid . '/edit/preference_setting';
 		}
 	}
 }
