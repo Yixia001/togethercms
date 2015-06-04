@@ -96,8 +96,14 @@ function bt_preprocess_user_profile(&$vars) {
 	$account = $vars ['elements'] ['#account'];
 	if (in_array ( 'partner', $account->roles )) {
 		if ($user->uid == $account->uid) {
+			drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/chuangyeConf.css', array (
+					'group' => CSS_THEME
+			) );
 			$vars ['theme_hook_suggestions'] [] = 'user_profile__partner__self';
 		} else {
+			drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/hehuorenDetail.css', array (
+					'group' => CSS_THEME
+			) );
 			$vars ['theme_hook_suggestions'] [] = 'user_profile__partner';
 		}
 	} elseif (in_array ( 'investor', $account->roles )) {
