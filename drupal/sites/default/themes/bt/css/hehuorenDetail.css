@@ -17,3 +17,13 @@
 .thecontainer{
 	margin-bottom: 0;
 }
+.btnsUl li{
+	width: 25%;
+}
+.userinfo_div .img-responsive{
+	display:inline;
+}
+.userinfo_div{
+	//float:left;
+	padding-bottom:60px;
+}

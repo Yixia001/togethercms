@@ -179,6 +179,77 @@ function bt_preprocess_user_profile(&$vars) {
 		} else { //touziren self
 			$vars['preference_setting_url'] = '/user/' . $user->uid . '/edit/preference_setting';
 		}
+	// 创业者
+	} else {
+		$profile_object = profile2_load_by_user ( $account, 'partner_profile' );
+
+	  $vars['field_co_status'] = _get_term_name($profile_object, 'field_co_status');
+
+    $vars['field_role_type'] = _get_term_name($profile_object, 'field_role_type');
+	
+	  
+	  if (isset ( $account->field_focus_areas [LANGUAGE_NONE] )) {
+	  	$focus_areas_fields = $account->field_focus_areas [LANGUAGE_NONE];
+	  	$focus_areas_html = '';
+	  	foreach ( $focus_areas_fields as $term ) {
+	  		if (! isset ( $term ['taxonomy_term'] )) {
+	  			$term ['taxonomy_term'] = taxonomy_term_load ( $term ['tid'] );
+	  		}
+	  		if ($focus_areas_html) {
+	  			$focus_areas_html .= '、';
+	  		}
+	  		$focus_areas_html .= $term ['taxonomy_term']->name;
+	  	}
+	  	$vars ['focus_areas_html'] = '<ul class="sclyUl">' . $focus_areas_html . '</ul>';
+	  } else {
+	  	$vars ['focus_areas_html'] = '';
+	  }
+	  
+    $vars['field_nopay_period'] = _get_term_name($profile_object, 'field_nopay_period');
+	  
+    $vars['field_venture_funding'] = _get_term_name($profile_object, 'field_venture_funding');
+	  
+	  $vars['field_expectation'] = _get_term_name($profile_object, 'field_expectation');
+	  
+	  $profile_object = profile2_load_by_user ( $account, 'basic_profile' );
+	  $field_education_collection = isset($profile_object->field_education_collection[LANGUAGE_NONE]) ? $profile_object->field_education_collection[LANGUAGE_NONE]:'';
+	  $education_html = '';
+	  if ($field_education_collection) {	  	
+	  	foreach ($field_education_collection as $collection) {
+	  		$id = $collection['value'];
+	  		$collection_obj = field_collection_item_load($id);
+	  		$fc_wrapper = entity_metadata_wrapper('field_collection_item', $collection_obj);
+	  		$begin = format_date($fc_wrapper->field_education_start->value(), 'date_ym');
+	  		$end = format_date($fc_wrapper->field_education_end->value(), 'date_ym');
+	  		$school = $fc_wrapper->field_school_name->value();
+	  		$specialty = $fc_wrapper->field_specialty->value();
+	  		if ($education_html) {
+	  			$education_html .= '<br/>';
+	  		}
+	  		$education_html .= $begin . '-' . $end . ' ' . $school . ' ' . $specialty;
+	  	}
+	  }
+	  $vars['education_html'] = $education_html;
+	  
+	  $field_work_experience = isset($profile_object->field_work_experience[LANGUAGE_NONE]) ? $profile_object->field_work_experience[LANGUAGE_NONE]:'';
+	  $work_experience_html = '';
+	  if ($field_work_experience) {
+	  	foreach ($field_work_experience as $collection) {
+	  		$id = $collection['value'];
+	  		$collection_obj = field_collection_item_load($id);
+	  		$fc_wrapper = entity_metadata_wrapper('field_collection_item', $collection_obj);
+	  		$begin = format_date($fc_wrapper->field_work_start->value(), 'date_ym');
+	  		$end = format_date($fc_wrapper->field_work_end->value(), 'date_ym');
+	  		$company = $fc_wrapper->field_company_name->value();
+	  		$position = $fc_wrapper->field_position->value();
+	  		if ($work_experience_html) {
+	  			$work_experience_html .= '<br/>';
+	  		}
+	  		$work_experience_html .= $begin . '-' . $end . ' ' . $company . ' ' . $position;
+	  	}
+	  }
+	  $vars['work_experience_html'] = $work_experience_html;
+	  
 	}
 }
 // add class to buttons

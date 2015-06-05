@@ -38,14 +38,22 @@
 <div class="userinfo_div">
 <div class="photoZone">
 			<div class="photo">
-				<img src="./img/1.jpg" alt="">
-				<div>王小三</div>
+				<?php print render($user_profile['user_picture'])?>
+				<div><?php print render($user_profile['field_nikename'])?></div>
 			</div>
 		</div>
 		<div class="menuZone">
 			<ul class="clear">
 				<li>
-					<div class="num"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><strong>北京</strong></div>
+					<div class="num"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><strong>
+					<?php if (isset($user_profile['field_address']['#items'][0]['administrative_area'])):?>
+					<?php if ($user_profile['field_address']['#items'][0]['administrative_area'] == $user_profile['field_address']['#items'][0]['locality']):?>
+					<?php print $user_profile['field_address']['#items'][0]['administrative_area']?>
+					<?php else:?>
+					<?php print $user_profile['field_address']['#items'][0]['administrative_area']?>.<?php print $user_profile['field_address']['#items'][0]['locality']?>
+					<?php endif;?>
+					<?php endif;?>
+					</strong></div>
 				</li>
 				<li>
 					<div class="num"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><strong>212</strong></div>
@@ -61,43 +69,23 @@
 					<div class="fl">
 						<strong>目前状态</strong>
 					</div>
-					<div class="fr huifont">可全职创业</div>
+					<div class="fr huifont"><?php print $field_co_status;?></div>
 				</li>
 				<li class="clear marginleftright20">
 					<div class="fl">
 						<strong>个人定位</strong>
 					</div>
-					<div class="fr huifont">营销合伙人</div>
+					<div class="fr huifont"><?php print $field_role_type;?></div>
 				</li>
 				<li class="clear marginleftright20 noborderbottom">
 					<div class="fl">
 						<strong>关注领域</strong>
 					</div>
 					<div class="fr huifont">
-						互联网、社交
+						<?php print $focus_areas_html?>
 					</div>
 				</li>
-				<li class="title_item">
-					个人档案
-				</li>
-				<li class="clear marginleftright20">
-					<div class="fl">
-						<strong>手机</strong>
-					</div>
-					<div class="fr">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					</div>
-					<div class="fr huifont">已验证</div>
-				</li>
-				<li class="clear marginleftright20 noborderbottom">
-					<div class="fl">
-						<strong>邮箱</strong>
-					</div>
-					<div class="fr">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					</div>
-					<div class="fr huifont">未验证</div>
-				</li>
+				
 				<li class="title_item">
 					创业背景
 				</li>
@@ -105,39 +93,39 @@
 					<div class="fl">
 						<strong>无薪可维持</strong>
 					</div>
-					<div class="fr huifont">3-6个月</div>
+					<div class="fr huifont"><?php print $field_nopay_period;?></div>
 				</li>
 				<li class="clear marginleftright20">
 					<div class="fl">
 						<strong>创业出资</strong>
 					</div>
-					<div class="fr huifont">力所能及</div>
+					<div class="fr huifont"><?php print $field_venture_funding;?></div>
 				</li>
 				<li class="clear marginleftright20 noborderbottom">
 					<div class="fl">
 						<strong>期望保障</strong>
 					</div>
 					<div class="fr huifont">
-						基本生活工资+期权
+						<?php print $field_expectation;?>
 					</div>
 				</li>
 				<li class="title_item">
 					工作经验
 				</li>
 				<li class="marginleftright20 huifont noborderbottom">
-					2006.9-2009.12 方正医疗 产品经理
+					<?php print $work_experience_html?>
 				</li>
 				<li class="title_item">
 					教育经历
 				</li>
 				<li class="marginleftright20 huifont noborderbottom">
-					2002.9-2006.6 南开大学 计算机科学 本科
+					<?php print $education_html;?>
 				</li>
 				<li class="title_item">
 					个人简介
 				</li>
 				<li class="marginleftright20 huifont noborderbottom">
-					数十个方式风格这个那个的故事你自己猜光先发货我就发死你个人自己猜
+					<?php print render($user_profile['field_personal_description'])?>
 				</li>
 			</ul>
 			<div class="connectBtn btn btn-default btn-block">
