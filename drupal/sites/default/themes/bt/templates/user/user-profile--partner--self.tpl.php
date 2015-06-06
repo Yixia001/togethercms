@@ -36,86 +36,142 @@
 
 ?>
 <div class="userinfo_div">
-<div class="photoZone">
-			<div class="photo">
-				<img src="./img/1.jpg" alt="">
-				<div>王小三</div>
-			</div>
-		</div>
-		<div class="menuZone">
-			<ul class="clear">
-				<li>
-					<div class="num">1</div>
-					<div class="subject">约谈</div>
-				</li>
-				<li>
-					<div class="num">6</div>
-					<div class="subject">关注</div>
-				</li>
-				<li>
-					<div class="num">2</div>
-					<div class="subject">粉丝</div>
-				</li>
-			</ul>
-		</div>
+
+
 		<div class="contentZone">
 			<ul>
-				<li class="clear">
+			  
+				<li class="clear marginleftright20">
 					<div class="fl">
-						<span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
-						<strong>创业想法</strong>
+						<strong>头像</strong>
 					</div>
-					<div class="fr">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					</div>
-					<div class="fr">未认证</div>
+					<div class="fr huifont partner_photo"><div class="photo">
+				<?php print render($user_profile['user_picture'])?></div></div>
 				</li>
-				<li class="clear">
+				
+				<li class="clear marginleftright20">
 					<div class="fl">
-						<span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>
-						<strong>我的人脉</strong>
+						<strong>真实姓名</strong>
 					</div>
-					<div class="fr">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					</div>
-					<div class="fr">已设置</div>
+					<div class="fr huifont "><?php print render($user_profile['field_real_name']);?></div>
 				</li>
-				<li class="clear">
+				<li class="clear marginleftright20">
 					<div class="fl">
-						<span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
-						<strong>我发布的职位</strong>
+						<strong>昵称</strong>
 					</div>
-					<div class="fr">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<div class="fr huifont "><?php print render($user_profile['field_nikename']);?></div>
+				</li>
+				<li class="clear marginleftright20">
+					<div class="fl">
+						<strong>地区</strong>
+					</div>
+					<div class="fr huifont "><?php if (isset($user_profile['field_address']['#items'][0]['administrative_area'])):?>
+					<?php if ($user_profile['field_address']['#items'][0]['administrative_area'] == $user_profile['field_address']['#items'][0]['locality']):?>
+					<?php print $user_profile['field_address']['#items'][0]['administrative_area']?>
+					<?php else:?>
+					<?php print $user_profile['field_address']['#items'][0]['administrative_area']?>.<?php print $user_profile['field_address']['#items'][0]['locality']?>
+					<?php endif;?>
+					<?php endif;?></div>
+				</li>
+				<li class="clear marginleftright20">
+					<div class="fl">
+						<strong>所在公司</strong>
+					</div>
+					<div class="fr huifont "><?php print render($user_profile['field_current_company']);?></div>
+				</li>
+				<li class="clear marginleftright20">
+					<div class="fl">
+						<strong>担任职务</strong>
+					</div>
+					<div class="fr huifont "><?php print render($user_profile['field_current_position']);?></div>
+				</li>
+				<li class="clear marginleftright20">
+					<div class="fl">
+						<strong>手机号</strong>
+					</div>
+					<div class="fr huifont "><?php print render($user_profile['field_phone_number']);?></div>
+				</li>
+				<li class="clear marginleftright20">
+					<div class="fl">
+						<strong>QQ</strong>
+					</div>
+					<div class="fr huifont "><?php print $field_qq_info;?></div>
+				</li>
+				<li class="clear marginleftright20">
+					<div class="fl">
+						<strong>微信</strong>
+					</div>
+					<div class="fr huifont "><?php print $field_weixin_info;?></div>
+				</li>
+				
+				<li class="title_item">
+					创业档案
+				</li>
+				<li class="clear marginleftright20">
+					<div class="fl">
+						<strong>目前状态</strong>
+					</div>
+					<div class="fr huifont "><?php print $field_co_status;?></div>
+				</li>
+				<li class="clear marginleftright20">
+					<div class="fl">
+						<strong>个人定位</strong>
+					</div>
+					<div class="fr huifont"><?php print $field_role_type;?></div>
+				</li>
+				<li class="clear marginleftright20 noborderbottom">
+					<div class="fl">
+						<strong>关注领域</strong>
+					</div>
+					<div class="fr huifont">
+						<?php print $focus_areas_html?>
 					</div>
 				</li>
-				<li class="clear">
+				
+				<li class="title_item">
+					创业背景
+				</li>
+				<li class="clear marginleftright20">
 					<div class="fl">
-						<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-						<strong>反馈建议</strong>
+						<strong>无薪可维持</strong>
 					</div>
-					<div class="fr">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+					<div class="fr huifont"><?php print $field_nopay_period;?></div>
+				</li>
+				<li class="clear marginleftright20">
+					<div class="fl">
+						<strong>创业出资</strong>
+					</div>
+					<div class="fr huifont"><?php print $field_venture_funding;?></div>
+				</li>
+				<li class="clear marginleftright20 noborderbottom">
+					<div class="fl">
+						<strong>期望保障</strong>
+					</div>
+					<div class="fr huifont">
+						<?php print $field_expectation;?>
 					</div>
 				</li>
-				<li class="clear">
-					<div class="fl">
-						<span class="glyphicon glyphicon-share" aria-hidden="true"></span>
-						<strong>推荐给好友</strong>
-					</div>
-					<div class="fr">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					</div>
+				<li class="title_item">
+					工作经验
 				</li>
-				<li class="clear">
-					<div class="fl">
-						<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-						<strong>管理我的项目</strong>
-					</div>
-					<div class="fr">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-					</div>
+				<li class="marginleftright20 huifont noborderbottom">
+					<?php print $work_experience_html?>
+				</li>
+				<li class="title_item">
+					教育经历
+				</li>
+				<li class="marginleftright20 huifont noborderbottom">
+					<?php print $education_html;?>
+				</li>
+				<li class="title_item">
+					个人简介
+				</li>
+				<li class="marginleftright20 huifont noborderbottom">
+					<?php print render($user_profile['field_personal_description'])?>
 				</li>
 			</ul>
+			<div class="connectBtn btn btn-default btn-block">
+				<a href="<?php print '/user/' .$uid . '/edit'?>" >修改我的信息</a>
+			</div>
 		</div>
 </div>

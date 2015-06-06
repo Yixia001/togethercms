@@ -51,7 +51,7 @@ function bt_theme(&$existing, $type, $theme, $path) {
 	$hooks ['user_profile_form'] = array (
 			'render element' => 'form',
 			'path' => drupal_get_path ( 'theme', 'bt' ) . '/templates',
-			'template' => 'user/user-edit' 
+	//		'template' => 'user/user-edit' 
 	);
 	return $hooks;
 }
@@ -90,13 +90,39 @@ function bt_preprocess_user_profile_form(&$vars) {
 			'group' => CSS_THEME
 	) );
 	unset ( $vars ['form'] ['group_basic'] ['field_gender'] [LANGUAGE_NONE] ['_none'] );
+	
+	$catogary = $vars['form']['#user_category'];
+	//dpm($vars, 'd');
+	switch ($catogary){
+		case 'basic_profile':
+			$vars['page_class'] = 'user_profile_basic' ;
+			$vars['theme_hook_suggestions'][] = 'user_profile_form__basic';
+			$vars['gender_man'] = drupal_render($vars['form']['profile_basic_profile']['field_gender'][LANGUAGE_NONE][1]);
+			$vars['gender_woman'] = drupal_render($vars['form']['profile_basic_profile']['field_gender'][LANGUAGE_NONE][2]);
+			hide($vars['form']['profile_basic_profile']['field_gender']);
+			break;
+		case 'preference_setting':
+			$vars['page_class'] = 'user_profile_preference' ;
+			$vars['theme_hook_suggestions'][] = 'user_profile_form__preference';
+			$vars['investlimitfrom'] = drupal_render($vars['form']['profile_preference_setting']['field_prefer_investlimit'][LANGUAGE_NONE][0]['from']);
+			$vars['investlimitto'] = drupal_render($vars['form']['profile_preference_setting']['field_prefer_investlimit'][LANGUAGE_NONE][0]['to']);
+			hide($vars['form']['profile_preference_setting']['field_prefer_investlimit']);
+			
+			break;
+		default:
+			$vars['page_class'] = '' ;
+	}
 }
 function bt_preprocess_user_profile(&$vars) {
 	global $user;
 	$account = $vars ['elements'] ['#account'];
+	$vars['uid'] = $account->uid;
 	if (in_array ( 'partner', $account->roles )) {
 		if ($user->uid == $account->uid) {
-			drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/chuangyeConf.css', array (
+			//drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/chuangyeConf.css', array (
+			//		'group' => CSS_THEME
+			//) );
+			drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/hehuorenDetail.css', array (
 					'group' => CSS_THEME
 			) );
 			$vars ['theme_hook_suggestions'] [] = 'user_profile__partner__self';
@@ -181,195 +207,85 @@ function bt_preprocess_user_profile(&$vars) {
 		}
 	// 创业者
 	} else {
-		$profile_object = profile2_load_by_user ( $account, 'partner_profile' );
-
-	  $vars['field_co_status'] = _get_term_name($profile_object, 'field_co_status');
-
-    $vars['field_role_type'] = _get_term_name($profile_object, 'field_role_type');
+		//if ($user->uid == $account->uid) {
+			
+		//} else {
+			$profile_object = profile2_load_by_user ( $account, 'partner_profile' );
+				
+		  $vars['field_co_status'] = _get_term_name($profile_object, 'field_co_status');
 	
-	  
-	  if (isset ( $account->field_focus_areas [LANGUAGE_NONE] )) {
-	  	$focus_areas_fields = $account->field_focus_areas [LANGUAGE_NONE];
-	  	$focus_areas_html = '';
-	  	foreach ( $focus_areas_fields as $term ) {
-	  		if (! isset ( $term ['taxonomy_term'] )) {
-	  			$term ['taxonomy_term'] = taxonomy_term_load ( $term ['tid'] );
-	  		}
-	  		if ($focus_areas_html) {
-	  			$focus_areas_html .= '、';
-	  		}
-	  		$focus_areas_html .= $term ['taxonomy_term']->name;
-	  	}
-	  	$vars ['focus_areas_html'] = '<ul class="sclyUl">' . $focus_areas_html . '</ul>';
-	  } else {
-	  	$vars ['focus_areas_html'] = '';
-	  }
-	  
-    $vars['field_nopay_period'] = _get_term_name($profile_object, 'field_nopay_period');
-	  
-    $vars['field_venture_funding'] = _get_term_name($profile_object, 'field_venture_funding');
-	  
-	  $vars['field_expectation'] = _get_term_name($profile_object, 'field_expectation');
-	  
-	  $profile_object = profile2_load_by_user ( $account, 'basic_profile' );
-	  $field_education_collection = isset($profile_object->field_education_collection[LANGUAGE_NONE]) ? $profile_object->field_education_collection[LANGUAGE_NONE]:'';
-	  $education_html = '';
-	  if ($field_education_collection) {	  	
-	  	foreach ($field_education_collection as $collection) {
-	  		$id = $collection['value'];
-	  		$collection_obj = field_collection_item_load($id);
-	  		$fc_wrapper = entity_metadata_wrapper('field_collection_item', $collection_obj);
-	  		$begin = format_date($fc_wrapper->field_education_start->value(), 'date_ym');
-	  		$end = format_date($fc_wrapper->field_education_end->value(), 'date_ym');
-	  		$school = $fc_wrapper->field_school_name->value();
-	  		$specialty = $fc_wrapper->field_specialty->value();
-	  		if ($education_html) {
-	  			$education_html .= '<br/>';
-	  		}
-	  		$education_html .= $begin . '-' . $end . ' ' . $school . ' ' . $specialty;
-	  	}
-	  }
-	  $vars['education_html'] = $education_html;
-	  
-	  $field_work_experience = isset($profile_object->field_work_experience[LANGUAGE_NONE]) ? $profile_object->field_work_experience[LANGUAGE_NONE]:'';
-	  $work_experience_html = '';
-	  if ($field_work_experience) {
-	  	foreach ($field_work_experience as $collection) {
-	  		$id = $collection['value'];
-	  		$collection_obj = field_collection_item_load($id);
-	  		$fc_wrapper = entity_metadata_wrapper('field_collection_item', $collection_obj);
-	  		$begin = format_date($fc_wrapper->field_work_start->value(), 'date_ym');
-	  		$end = format_date($fc_wrapper->field_work_end->value(), 'date_ym');
-	  		$company = $fc_wrapper->field_company_name->value();
-	  		$position = $fc_wrapper->field_position->value();
-	  		if ($work_experience_html) {
-	  			$work_experience_html .= '<br/>';
-	  		}
-	  		$work_experience_html .= $begin . '-' . $end . ' ' . $company . ' ' . $position;
-	  	}
-	  }
-	  $vars['work_experience_html'] = $work_experience_html;
-	  
-	}
-}
-// add class to buttons
-function bt_button1($variables) {
-	$element = $variables ['element'];
-	$element ['#attributes'] ['type'] = 'submit';
-	element_set_attributes ( $element, array (
-			'id',
-			'name',
-			'value' 
-	) );
-	
-	$element ['#attributes'] ['class'] [] = 'form-' . $element ['#button_type'];
-	$element ['#attributes'] ['class'] [] = 'btn';
-	// adding bootstrap classes.
-	if ($element ['#button_type'] == 'submit') {
-		$element ['#attributes'] ['class'] [] = 'btn-primary';
-		$element ['#attributes'] ['class'] [] = 'btn-lg';
-	}
-	if (! empty ( $element ['#attributes'] ['disabled'] )) {
-		$element ['#attributes'] ['class'] [] = 'form-button-disabled';
-	}
-	
-	return '<input' . drupal_attributes ( $element ['#attributes'] ) . ' />';
-}
-
-/**
- * ** theme form textfields.
- * **
- */
-function bt_textfield1($variables) {
-	$element = $variables ['element'];
-	$output = '';
-	// login form adding glyphicon.
-	if ($element ['#name'] == 'name') {
-		$output = '<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>';
-	}
-	
-	// force type.
-	$element ['#attributes'] ['type'] = 'text';
-	// set placeholder.
-	// if(isset($variables['element']['#description'])){
-	$element ['#attributes'] ['placeholder'] = $variables ['element'] ['#title'];
-	// }
-	
-	element_set_attributes ( $element, array (
-			'id',
-			'name',
-			'value',
-			'size',
-			'maxlength' 
-	) );
-	// adding bootstrap classes.
-	_form_set_class ( $element, array (
-			'form-text',
-			'form-control',
-			'input-lg-3' 
-	) );
-	
-	$extra = '';
-	if ($element ['#autocomplete_path'] && drupal_valid_path ( $element ['#autocomplete_path'] )) {
-		drupal_add_library ( 'system', 'drupal.autocomplete' );
-		$element ['#attributes'] ['class'] [] = 'form-autocomplete';
+	    $vars['field_role_type'] = _get_term_name($profile_object, 'field_role_type');
 		
-		$attributes = array ();
-		$attributes ['type'] = 'hidden';
-		$attributes ['id'] = $element ['#attributes'] ['id'] . '-autocomplete';
-		$attributes ['value'] = url ( $element ['#autocomplete_path'], array (
-				'absolute' => TRUE 
-		) );
-		$attributes ['disabled'] = 'disabled';
-		$attributes ['class'] [] = 'autocomplete';
-		$extra = '<input' . drupal_attributes ( $attributes ) . ' />';
+		  
+		  if (isset ( $account->field_focus_areas [LANGUAGE_NONE] )) {
+		  	$focus_areas_fields = $account->field_focus_areas [LANGUAGE_NONE];
+		  	$focus_areas_html = '';
+		  	foreach ( $focus_areas_fields as $term ) {
+		  		if (! isset ( $term ['taxonomy_term'] )) {
+		  			$term ['taxonomy_term'] = taxonomy_term_load ( $term ['tid'] );
+		  		}
+		  		if ($focus_areas_html) {
+		  			$focus_areas_html .= '、';
+		  		}
+		  		$focus_areas_html .= $term ['taxonomy_term']->name;
+		  	}
+		  	$vars ['focus_areas_html'] = '<ul class="sclyUl">' . $focus_areas_html . '</ul>';
+		  } else {
+		  	$vars ['focus_areas_html'] = '';
+		  }
+		  
+	    $vars['field_nopay_period'] = _get_term_name($profile_object, 'field_nopay_period');
+		  
+	    $vars['field_venture_funding'] = _get_term_name($profile_object, 'field_venture_funding');
+		  
+		  $vars['field_expectation'] = _get_term_name($profile_object, 'field_expectation');
+			
+			
+		  $profile_object = profile2_load_by_user ( $account, 'basic_profile' );
+		  $vars['field_qq_info'] = isset($profile_object->field_qq_info[LANGUAGE_NONE])? $profile_object->field_qq_info[LANGUAGE_NONE][0]['value']:'';
+		  $vars['field_weixin_info'] = isset($profile_object->field_weixin_info[LANGUAGE_NONE])? $profile_object->field_weixin_info[LANGUAGE_NONE][0]['value']:'';
+		  $field_education_collection = isset($profile_object->field_education_collection[LANGUAGE_NONE]) ? $profile_object->field_education_collection[LANGUAGE_NONE]:'';
+		  $education_html = '';
+		  if ($field_education_collection) {	  	
+		  	foreach ($field_education_collection as $collection) {
+		  		$id = $collection['value'];
+		  		$collection_obj = field_collection_item_load($id);
+		  		$fc_wrapper = entity_metadata_wrapper('field_collection_item', $collection_obj);
+		  		$begin = format_date($fc_wrapper->field_education_start->value(), 'date_ym');
+		  		$end = format_date($fc_wrapper->field_education_end->value(), 'date_ym');
+		  		$school = $fc_wrapper->field_school_name->value();
+		  		$specialty = $fc_wrapper->field_specialty->value();
+		  		if ($education_html) {
+		  			$education_html .= '<br/>';
+		  		}
+		  		$education_html .= $begin . '-' . $end . ' ' . $school . ' ' . $specialty;
+		  	}
+		  }
+		  $vars['education_html'] = $education_html;
+		  
+		  $field_work_experience = isset($profile_object->field_work_experience[LANGUAGE_NONE]) ? $profile_object->field_work_experience[LANGUAGE_NONE]:'';
+		  $work_experience_html = '';
+		  if ($field_work_experience) {
+		  	foreach ($field_work_experience as $collection) {
+		  		$id = $collection['value'];
+		  		$collection_obj = field_collection_item_load($id);
+		  		$fc_wrapper = entity_metadata_wrapper('field_collection_item', $collection_obj);
+		  		$begin = format_date($fc_wrapper->field_work_start->value(), 'date_ym');
+		  		$end = format_date($fc_wrapper->field_work_end->value(), 'date_ym');
+		  		$company = $fc_wrapper->field_company_name->value();
+		  		$position = $fc_wrapper->field_position->value();
+		  		if ($work_experience_html) {
+		  			$work_experience_html .= '<br/>';
+		  		}
+		  		$work_experience_html .= $begin . '-' . $end . ' ' . $company . ' ' . $position;
+		  	}
+		  }
+		  
+		  $vars['work_experience_html'] = $work_experience_html;
+		//}
 	}
-	
-	$output .= '<input' . drupal_attributes ( $element ['#attributes'] ) . ' />';
-	
-	return $output . $extra;
 }
 
-/**
- * * theme password field **
- */
-function bt_password1($variables) {
-	$element = $variables ['element'];
-	$element ['#attributes'] ['type'] = 'password';
-	$element ['#attributes'] ['placeholder'] = $variables ['element'] ['#title'];
-	element_set_attributes ( $element, array (
-			'id',
-			'name',
-			'size',
-			'maxlength' 
-	) );
-	_form_set_class ( $element, array (
-			'form-text',
-			'form-control' 
-	) );
-	
-	$output = '';
-	// login form adding glyphicon.
-	if ($element ['#name'] == 'pass') {
-		$output = '<span class="input-group-addon"><span class="glyphicon glyphicon-eye-close"></span></span>';
-	}
-	
-	return $output . '<input' . drupal_attributes ( $element ['#attributes'] ) . ' />';
-}
-
-/**
- * Theme form element *
- */
-function bt_form_element1($variables) {
-	$element = &$variables ['element'];
-	
-	// If #title is not set, we don't display any label or required marker.
-	if (! isset ( $element ['#title'] ) || empty ( $element ['#title'] )) {
-		$element ['#title_display'] = 'none';
-	}
-	
-	return theme_form_element ( $variables );
-}
 
 /**
  * Overrides theme_menu_tree().

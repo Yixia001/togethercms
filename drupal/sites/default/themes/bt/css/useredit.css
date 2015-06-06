@@ -5,10 +5,43 @@
 	display:inline;
 }
 .user_profile{
-	float:left;
 	padding-bottom:50px;
 }
-.user_profile #edit-field-address{
-	width:100%;
+.form-item-profile-gender{
 	clear:both;
+}
+.form-item-profile-gender ul{
+	clear:both;
+}
+.form-item-profile-gender li{
+	float:left;
+	margin-right:10px;
+}
+.container-inline-date .form-type-select{
+	margin-right:10px;
+}
+
+.user_profile_preference	.form-group{
+	  float:left;
+	  clear:both;
+}
+.user_profile_preference	.form-group .form-group{
+	  float:left;
+	  clear:none;
+	  
+}
+.user_profile_preference	.form-item-profile-preference .form-group label{
+	  float:left;
+	  clear:none;
+	  margin:4px 10px;
+}
+.user_profile_preference	.form-group .form-group input{
+	  float:left;
+	  clear:none;
+	  width:auto;
+}
+.form-group .checkbox{
+	  float:left;
+	  margin-top:0;
+	  margin-left:10px;
 }
