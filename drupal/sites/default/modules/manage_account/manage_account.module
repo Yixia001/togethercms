@@ -65,6 +65,15 @@ function manage_account_form_alter(&$form, &$form_state, $form_id) {
 			//$form['account']['pass']['#title_display'] = 'invisible';
 		}
 	}
+	if ($form['#id'] == 'views-exposed-form-investors-page') {
+		unset($form['investregion']['#options']['不限']);
+		foreach(element_children($form) as $key) {			
+			if ($form[$key]['#type'] == 'select') {
+				$form[$key]['#options']['All'] = '全部';
+			}
+		}
+		
+	}
 }
 
 function manage_account_register_validate(&$form, &$form_state) {

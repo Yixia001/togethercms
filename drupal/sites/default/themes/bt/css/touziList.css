@@ -58,3 +58,15 @@
 		.btnsUl li{
 			width: 25%;
 		}
+		
+		#views-exposed-form-investors-page .views-exposed-form .views-exposed-widget{
+		  float:left;
+		  clear:both;
+		}
+		#views-exposed-form-investors-page .views-exposed-form .views-exposed-widget .form-type-bef-link{
+		  float:left;
+		  margin-left:10px;
+		}
+		#views-exposed-form-investors-page a.active {
+		  background-color:#eed;
+		}

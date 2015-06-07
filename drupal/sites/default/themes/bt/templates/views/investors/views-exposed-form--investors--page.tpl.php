@@ -35,19 +35,9 @@
             <?php print $widget->label; ?>
           </label>
         <?php endif; ?>
-        <?php if (!empty($widget->operator)): ?>
-          <div class="views-operator">
-            <?php print $widget->operator; ?>
-          </div>
-        <?php endif; ?>
         <div class="views-widget">
           <?php print $widget->widget; ?>
         </div>
-        <?php if (!empty($widget->description)): ?>
-          <div class="description">
-            <?php print $widget->description; ?>
-          </div>
-        <?php endif; ?>
       </div>
     <?php endforeach; ?>
     <?php if (!empty($sort_by)): ?>
@@ -69,7 +59,7 @@
       </div>
     <?php endif; ?>
     <div class="views-exposed-widget views-submit-button">
-      <?php print $button; ?>
+      <?php //print $button; ?>
     </div>
     <?php if (!empty($reset_button)): ?>
       <div class="views-exposed-widget views-reset-button">

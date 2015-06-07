@@ -104,9 +104,7 @@ function bt_preprocess_user_profile_form(&$vars) {
 		case 'preference_setting':
 			$vars['page_class'] = 'user_profile_preference' ;
 			$vars['theme_hook_suggestions'][] = 'user_profile_form__preference';
-			$vars['investlimitfrom'] = drupal_render($vars['form']['profile_preference_setting']['field_prefer_investlimit'][LANGUAGE_NONE][0]['from']);
-			$vars['investlimitto'] = drupal_render($vars['form']['profile_preference_setting']['field_prefer_investlimit'][LANGUAGE_NONE][0]['to']);
-			hide($vars['form']['profile_preference_setting']['field_prefer_investlimit']);
+			hide($vars['form']['profile_preference_setting']['field_prefer_investlimit'][LANGUAGE_NONE]['_none']);
 			
 			break;
 		default:
