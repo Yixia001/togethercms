@@ -59,7 +59,7 @@
       </div>
     <?php endif; ?>
     <div class="views-exposed-widget views-submit-button">
-      <?php //print $button; ?>
+      <?php print $button; ?>
     </div>
     <?php if (!empty($reset_button)): ?>
       <div class="views-exposed-widget views-reset-button">
