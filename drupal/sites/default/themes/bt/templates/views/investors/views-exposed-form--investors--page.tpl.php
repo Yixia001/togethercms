@@ -60,6 +60,9 @@
     <?php endif; ?>
     <div class="views-exposed-widget views-submit-button">
       <?php print $button; ?>
+      <div class="views-reset-button">
+        <?php print $reset_button; ?>
+      </div>
     </div>
     <?php if (!empty($reset_button)): ?>
       <div class="views-exposed-widget views-reset-button">
