@@ -144,6 +144,9 @@ function bt_preprocess_user_profile(&$vars) {
 		}
 	}
 	
+	//$profile_object = profile2_load_by_user ( $account, 'preference_setting' );
+	//dpm($profile_object, 'd');
+	
 	if (in_array ( 'investor', $account->roles )) {
 		if ($user->uid != $account->uid) {
 			$profile_object = profile2_load_by_user ( $account, 'investor_profile' );

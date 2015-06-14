@@ -70,3 +70,7 @@
 		#views-exposed-form-investors-page a.active {
 		  background-color:#eed;
 		}
+.views-exposed-widget li{
+	float:left;
+	margin-right:10px;
+}

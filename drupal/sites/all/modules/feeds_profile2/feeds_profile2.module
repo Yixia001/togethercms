@@ -9,18 +9,129 @@ function feeds_profile2_feeds_processor_targets_alter(&$targets, $entity_type, $
   if ($entity_type == 'user') {
     foreach (profile2_get_types() as $profile_type) {
       $fields = field_info_instances('profile2', $profile_type->type);
-      foreach ($fields as $field) {
+      foreach ($fields as $field_name => $field) {
+        $name_label = 'profile2: '  . $field['bundle'] . ': ' . $field['label'];
         $targets["profile2:{$field['bundle']}:{$field['field_name']}"] = array(
-          'name' => t($field['label']),
-          'description' => t($field['description']),
+          'name' => $name_label,
+          'description' => $field['description'],
         );
+
+        $info = field_info_field($field_name);
+
+        // Specific Target handler for taxonomy_term_reference
+        if (module_exists('taxonomy') && $info['type'] == 'taxonomy_term_reference') {
+          unset($targets["profile2:{$field['bundle']}:{$field['field_name']}"]);
+          $name_label = "profile2: {$field['bundle']}: {$field['label']}";
+          $targets["profile2:{$field['bundle']}:{$field['field_name']}"] = array(
+            'name' => $name_label,
+            'callback' => 'feeds_profile2_taxonomy_term_set_target',
+            'description' => t('The @label field of the entity.', array('@label' => $field['field_name'])),
+            'summary_callback' => 'taxonomy_feeds_summary_callback',
+            'form_callback' => 'taxonomy_feeds_form_callback',
+          );
+        }
+
+        // Specific Target handler for addressfield.
+        if (module_exists('addressfield') && $info['type'] == 'addressfield') {
+          unset($targets["profile2:{$field['bundle']}:{$field['field_name']}"]);
+          foreach ($info['columns'] as $sub_field => $schema_info) {
+            $name_label = 'profile2: ' . $field['bundle'] . ': ' . $field['label'] . ': ' . drupal_ucfirst(str_replace('_', ' ', $sub_field));
+            $targets["profile2_address_field:{$field['bundle']}:{$field['field_name']}:{$sub_field}"] = array(
+              'name' => $name_label,
+              'callback' => 'feeds_profile2_addressfield_set_target',
+              'real_target' => $info['field_name'],
+              'description' => $schema_info['description'],
+            );
+          }
+        }
+
+        if (module_exists('link') && $info['type'] == 'link_field') {
+          unset($targets["profile2:{$field['bundle']}:{$field['field_name']}"]);
+
+          if (array_key_exists('url', $info['columns'])) {
+            $name_label = "profile2: {$field['bundle']}: {$field['label']}: url";
+            $targets["profile2_link:{$field['bundle']}:{$field['field_name']}:url"] = array(
+              'name' => $name_label,
+              'callback' => 'feeds_profile2_link_set_target',
+              'description' => t('The @label field of the entity.', array('@label' => $field['field_name'])),
+              'real_target' => $info['field_name'],
+              'summary_callback' => 'feeds_mapper_summary_language',
+              'form_callback' => 'feeds_mapper_form_language',
+            );
+          }
+          if (array_key_exists('title', $info['columns'])) {
+            $name_label = "profile2: {$field['bundle']}: {$field['label']}: title";
+            $targets["profile2_link:{$field['bundle']}:{$field['field_name']}:title"] = array(
+              'name' => $name_label,
+              'callback' => 'feeds_profile2_link_set_target',
+              'description' => t('The @label field of the entity.', array('@label' => $field['field_name'])),
+              'real_target' => $info['field_name'],
+              'summary_callback' => 'feeds_mapper_summary_language',
+              'form_callback' => 'feeds_mapper_form_language',
+            );
+          }
+        }
       }
     }
   }
 }
 
 /**
- * Implements hook_feeds_after_save() from Feeds.
+ * Callback for feeds_profile2_feeds_processor_targets_alter().
+ *
+ * @param object $source
+ *   Field mapper source settings.
+ * @param object $entity
+ *   An entity object, for instance a node object.
+ * @param object $target
+ *   A string identifying the target on the node.
+ * @param array $terms
+ *   The value to populate the target with.
+ */
+function feeds_profile2_taxonomy_term_set_target($source, $entity, $target, array $terms, $mapping = array()) {
+  $explodes = explode(':', $target);
+  $target = $explodes[2];
+  taxonomy_feeds_set_target($source, $entity, $target, $terms, $mapping);
+}
+
+/**
+ * Callback for feeds_profile2_feeds_processor_targets_alter().
+ *
+ * @param object $source
+ *   Field mapper source settings.
+ * @param object $entity
+ *   An entity object, for instance a node object.
+ * @param object $target
+ *   A string identifying the target on the node.
+ * @param array $values
+ *   The value to populate the target with.
+ */
+function feeds_profile2_addressfield_set_target($source, $entity, $target, $values) {
+  $explodes = explode(':', $target);
+  $target = "{$explodes[2]}:{$explodes[3]}";
+  addressfield_set_target($source, $entity, $target, $values);
+}
+
+/**
+ * Callback for feeds_profile2_feeds_processor_targets_alter().
+ *
+ * @param object $source
+ *   Field mapper source settings.
+ * @param object $entity
+ *   An entity object, for instance a node object.
+ * @param object $target
+ *   A string identifying the target on the node.
+ * @param array $values
+ *   The value to populate the target with.
+ */
+function feeds_profile2_link_set_target($source, $entity, $target, array $values, $mapping = array()) {
+  $explodes = explode(':', $target);
+  $target = "{$explodes[2]}:{$explodes[3]}";
+  link_feeds_set_target($source, $entity, $target, $values, $mapping);
+}
+
+/**
+ * Implements hook_feeds_after_save().
  */
 function feeds_profile2_feeds_after_save(FeedsSource $source, $entity, $item, $entity_id) {
   $profiles = array();
@@ -32,7 +143,22 @@ function feeds_profile2_feeds_after_save(FeedsSource $source, $entity, $item, $e
       list($entity_type, $bundle, $field_name) = explode(':', $mapping['target']);
       $profiles[$bundle][$field_name] = $item[strtolower($mapping['source'])];
     }
+
+    if (strpos($mapping['target'], 'profile2_address_field:') === 0) {
+      list($entity_type, $bundle, $field_name, $sub_field) = explode(':', $mapping['target']);
+      $entity_type = 'profile2';
+      $profiles[$bundle][$field_name][$sub_field] = $item[strtolower($mapping['source'])];
+    }
+
+    if (strpos($mapping['target'], 'profile2_link:') === 0) {
+      list($entity_type, $bundle, $field_name, $sub_field) = explode(':', $mapping['target']);
+      $entity_type = 'profile2';
+      $profiles[$bundle][$field_name][$sub_field] = $item[strtolower($mapping['source'])];
+    }
+
   }
+
+  
 
   // Save or update each profile.
   foreach ($profiles as $bundle => $values) {
@@ -56,7 +182,44 @@ function feeds_profile2_feeds_after_save(FeedsSource $source, $entity, $item, $e
 
     // Set mapped field values.
     foreach ($values as $field_name => $value) {
-      $profile_wrapper->{$field_name}->set($value);
+
+      if (isset($value)) {
+        // Check field name info to intercept particular field types.
+        $field_info = field_info_field($field_name);
+
+        // For a taxonomy_term reference field, the value to set is the tid
+        // extracted from the taxonomy term_name.
+        if ($field_info['type'] == 'taxonomy_term_reference') {
+        	if (is_array($value)) {
+        		foreach ($value as $key => $t_name) {
+        			$tids = taxonomy_get_term_by_name($t_name, $field_info['settings']['allowed_values'][0]['vocabulary']);
+        			reset($tids);
+        			$value[$key] = key($tids);
+        		}
+        	} else {
+	          $tids = taxonomy_get_term_by_name($value, $field_info['settings']['allowed_values'][0]['vocabulary']);
+	          reset($tids);
+	          $value = key($tids);
+        	}
+        }
+        // If the field is multivalue.
+        if ($field_info['cardinality'] != 1) {
+          // Add the new value to the existing ones, if there is room for it.
+          $field_values = $profile_wrapper->$field_name->value();
+          if ($field_info['cardinality'] == '-1' || count($field_values) < $field_info['cardinality']) {
+          	if (is_array($value)) {
+          		$field_values = $value;
+          	} else {
+              $field_values[] = $value;
+          	}
+            $profile_wrapper->$field_name->set($field_values);
+          }
+        }
+        else {
+          $profile_wrapper->{$field_name}->set($value);
+        }
+      }
+
     }
 
     // Save profile.
