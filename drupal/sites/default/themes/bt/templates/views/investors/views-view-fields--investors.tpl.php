@@ -29,14 +29,23 @@
 				<?php print $fields['picture']->content?>
 				<div class="userInfo">
 					<div>
-						<span class="name"><?php print $fields['field_nikename']->content?></span>
-						<span class="weizhi"><?php print $fields['field_address_locality']->content?></span>
+						<span class="name"><?php print $fields['field_nikename']->content?$fields['field_nikename']->content:$fields['field_real_name']->content?></span>
+						<span class="weizhi"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><?php print $fields['field_address_locality']->content?></span></span>
 					</div>
 					<div class="introduce">
+					  <?php if (mb_strlen($fields['field_personal_description']->content, 'utf-8') < 50) :?>
+					    <?php print $fields['field_personal_description']->content?>
+					  <?php elseif(strlen($fields['field_personal_description']->content) > 20 && $fields['field_current_position']->content):?>
+					    <?php print $fields['field_current_company']->content?>&nbsp;<?php print $fields['field_current_position']->content?>
+					  <?php else:?>
+					    <?php print mb_substr($fields['field_personal_description']->content, 0, 50, 'utf-8') . '...' ?>
+					  <?php endif;?>
+						
+						
 						
 					</div>
 					<div class="ly">
-						互联网金融/O2O/智能硬件/互联网金融
+						<span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span><?php print $fields['field_investfield']->content?>&nbsp;</span>
 					</div>
 				</div>
 </li>

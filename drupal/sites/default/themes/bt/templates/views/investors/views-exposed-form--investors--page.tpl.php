@@ -58,16 +58,18 @@
         <?php print $offset; ?>
       </div>
     <?php endif; ?>
-    <div class="views-exposed-widget views-submit-button">
+    <div class="views-exposed-widget">
+    <ul>
+    <li>
       <?php print $button; ?>
-      <div class="views-reset-button">
-        <?php print $reset_button; ?>
-      </div>
-    </div>
+    </li>
     <?php if (!empty($reset_button)): ?>
-      <div class="views-exposed-widget views-reset-button">
+      <li>
         <?php print $reset_button; ?>
-      </div>
+      </li>
     <?php endif; ?>
+    </ul>
+    </div>
+    
   </div>
 </div>
