@@ -44,11 +44,11 @@ function bootstrap_pager($variables) {
 
   // End of generation loop preparation.
   // @todo add theme setting for this.
-  // $li_first = theme('pager_first', array(
-  // 'text' => (isset($tags[0]) ? $tags[0] : t('first')),
-  // 'element' => $element,
-  // 'parameters' => $parameters,
-  // ));
+   $li_first = theme('pager_first', array(
+   'text' => (isset($tags[0]) ? $tags[0] : t('first')),
+   'element' => $element,
+   'parameters' => $parameters,
+   ));
   $li_previous = theme('pager_previous', array(
     'text' => (isset($tags[1]) ? $tags[1] : t('previous')),
     'element' => $element,
@@ -61,25 +61,26 @@ function bootstrap_pager($variables) {
     'interval' => 1,
     'parameters' => $parameters,
   ));
+  
   // @todo add theme setting for this.
-  // $li_last = theme('pager_last', array(
-  // 'text' => (isset($tags[4]) ? $tags[4] : t('last')),
-  // 'element' => $element,
-  // 'parameters' => $parameters,
-  // ));
+   $li_last = theme('pager_last', array(
+   'text' => (isset($tags[4]) ? $tags[4] : t('last')),
+   'element' => $element,
+   'parameters' => $parameters,
+   ));
   if ($pager_total[$element] > 1) {
     // @todo add theme setting for this.
-    // if ($li_first) {
-    // $items[] = array(
-    // 'class' => array('pager-first'),
-    // 'data' => $li_first,
-    // );
-    // }
+     if ($li_first) {
+     $items[] = array(
+     'class' => array('pager-first'),
+     'data' => $li_first,
+     );
+     }
     if ($li_previous) {
-      $items[] = array(
-        'class' => array('prev'),
-        'data' => $li_previous,
-      );
+     // $items[] = array(
+     //   'class' => array('prev'),
+     //   'data' => $li_previous,
+     // );
     }
     // When there is more than one page, create the pager list.
     if ($i != $pager_max) {
@@ -129,18 +130,18 @@ function bootstrap_pager($variables) {
     }
     // End generation.
     if ($li_next) {
-      $items[] = array(
-        'class' => array('next'),
-        'data' => $li_next,
-      );
+     // $items[] = array(
+     //   'class' => array('next'),
+     //   'data' => $li_next,
+      //);
     }
     // @todo add theme setting for this.
-    // if ($li_last) {
-    // $items[] = array(
-    // 'class' => array('pager-last'),
-    // 'data' => $li_last,
-    // );
-    // }
+     if ($li_last) {
+     $items[] = array(
+     'class' => array('pager-last'),
+     'data' => $li_last,
+     );
+     }
 
     $build = array(
       '#theme_wrappers' => array('container__pager'),

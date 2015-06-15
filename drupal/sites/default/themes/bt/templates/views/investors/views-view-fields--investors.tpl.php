@@ -23,7 +23,7 @@
  *
  * @ingroup views_templates
  */
-
+global $user;
 ?>
 <li>
 				<?php print $fields['picture']->content?>
@@ -47,9 +47,21 @@
 					<div class="ly">
 						<span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span><?php print $fields['field_investfield']->content?>&nbsp;</span>
 					</div>
+					<?php if ($user->uid):?>
+					<div class="downPart clear">
+					<div class="btn-group fr" role="group">
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="content"><?php print $fields['ops']->content?></span>
+					 	  </button>					 	
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span class="content"><?php print $fields['friend_link']->content?></span>
+					  	</button>
+					  	<button type="button" class="btn btn-default">
+					  		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span><span class="content"><a href="/rychat/<?php print $row->uid?>" target="_blank">联系投资人</a></span>
+					  	</button>
+					</div>					
+				</div>
+				<?php endif;?>
 				</div>
 </li>
 
-<?php print $fields['ops']->content?><br>
-<?php print $fields['friend_link']->content?><br>
-<a href="/rychat/<?php print $row->uid?>" target="_blank">联系合伙人</a>
