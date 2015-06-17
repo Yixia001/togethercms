@@ -145,23 +145,24 @@ function bt_preprocess_user_profile(&$vars) {
 	}
 	
 	//$profile_object = profile2_load_by_user ( $account, 'preference_setting' );
-	//dpm($profile_object, 'd');
+	//dpm($vars, 'd');
 	
 	if (in_array ( 'investor', $account->roles )) {
 		if ($user->uid != $account->uid) {
+			$visitorcompany = isset ( $account->field_current_company [LANGUAGE_NONE] ) ? $account->field_current_company [LANGUAGE_NONE] [0] ['value'] : '';
+			$visitorposition = isset ( $account->field_current_position [LANGUAGE_NONE] ) ? $account->field_current_position [LANGUAGE_NONE] [0] ['value'] : '';
+			if ($visitorcompany && $visitorposition) {
+				$visitorcompany .= ' . ';
+			}
+			$visitorcompany .= $visitorposition;
+			$vars ['visitorcompany'] = $visitorcompany;
 			$profile_object = profile2_load_by_user ( $account, 'investor_profile' );
 			// $profile = profile2_load_by_user($account, 'basic_profile');
 			// $profile = profile2_load_by_user($account, 'preference_setting');
 			// dpm($profile_object, 'p');
 			// $wrap = entity_metadata_wrapper('Profile', $profile_object);
 			// 公司职位
-			$visitorcompany = isset ( $profile_object->field_visitorcompany [LANGUAGE_NONE] ) ? $profile_object->field_visitorcompany [LANGUAGE_NONE] [0] ['value'] : '';
-			$visitorposition = isset ( $profile_object->field_visitorposition [LANGUAGE_NONE] ) ? $profile_object->field_visitorposition [LANGUAGE_NONE] [0] ['value'] : '';
-			if ($visitorcompany && $visitorposition) {
-				$visitorcompany .= ' . ';
-			}
-			$visitorcompany .= $visitorposition;
-			$vars ['visitorcompany'] = $visitorcompany;
+			
 			// 投资理念
 			$visitordesc = isset ( $profile_object->field_visitordesc [LANGUAGE_NONE] ) ? $profile_object->field_visitordesc [LANGUAGE_NONE] [0] ['value'] : '';
 			$vars ['visitordesc'] = $visitordesc;
@@ -202,6 +203,36 @@ function bt_preprocess_user_profile(&$vars) {
 				$vars ['projects_html'] = '<ul class="itemUl">' . $projects_html . '</ul>';
 			} else {
 				$vars ['projects_html'] = '';
+			}
+			
+			$profile_object = profile2_load_by_user ( $account, 'preference_setting' );
+			// 投资地域
+			if (isset ( $profile_object->field_prefer_investregion [LANGUAGE_NONE] ) && $profile_object->field_prefer_investregion [LANGUAGE_NONE][0]['value']) {
+				$investregionfields = $profile_object->field_prefer_investregion [LANGUAGE_NONE];
+				$investregion_html = '';
+				foreach ( $investregionfields as $item ) {
+					if ($item ['value']) {
+					  $investregion_html .= '<li>' . $item ['value'] . '</li>';
+					}
+				}
+				$vars ['investregion_html'] = '<ul class="sclyUl">' . $investregion_html . '</ul>';
+			} else {
+				$vars ['investregion_html'] = '';
+			}
+			
+			// 投资领域
+			if (isset ( $profile_object->field_investfield [LANGUAGE_NONE] )) {
+				$investfields = $profile_object->field_investfield [LANGUAGE_NONE];
+				$invest_html = '';
+				foreach ( $investfields as $term ) {
+					if (! isset ( $term ['taxonomy_term'] )) {
+						$term ['taxonomy_term'] = taxonomy_term_load ( $term ['tid'] );
+					}
+					$invest_html .= '<li>' . $term ['taxonomy_term']->name . '</li>';
+				}
+				$vars ['invest_html'] = '<ul class="sclyUl">' . $invest_html . '</ul>';
+			} else {
+				$vars ['invest_html'] = '';
 			}
 		} else { //touziren self
 			$vars['preference_setting_url'] = '/user/' . $user->uid . '/edit/preference_setting';

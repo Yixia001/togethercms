@@ -33,18 +33,18 @@
  *
  * @ingroup themeable
  */
-
+$name = isset($user_profile['field_nikename'])?$user_profile['field_nikename']:$user_profile['field_real_name'];
 ?>
 <div class="userinfo_div">
     <div class="userInfoZone clear">
 			<?php print render($user_profile['user_picture'])?>
 			<div class="userInfo">
-				<div class="name"><?php print render($user_profile['field_nikename'])?></div>
+				<div class="name"><?php print render($name)?></div>
 				<p class="job">
-					<?php print $visitorcompany;?>
+					<?php print $visitorcompany;?>&nbsp;
 				</p>
 				<p class="introduce">
-					<?php print $visitordesc;?>
+					<?php print render($user_profile['field_personal_description'])?>&nbsp;
 				</p>
 				<!-- <ul>
 					<li class="weizhi"><?php print $user_profile['field_address']['#items'][0]['administrative_area']?>.<?php print $user_profile['field_address']['#items'][0]['locality']?></li>
@@ -56,24 +56,35 @@
 				<div class="smallIcons clear">
 					<div class="btn-group fl" role="group">
 					  	<button type="button" class="btn btn-default">
-					  		<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><span class="content"><?php print $user_profile['field_address']['#items'][0]['administrative_area']?>.<?php print $user_profile['field_address']['#items'][0]['locality']?></span>
+					  		<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><span class="content"><?php print $user_profile['field_address']['#items'][0]['locality']?></span>
 					 	</button>
 					  	<button type="button" class="btn btn-default">
-					  		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span><span class="content">199</span>
-					  	</button>
+					  		<span class="glyphicon glyphicon-star" aria-hidden="true"></span><span class="content"><?php print $user_profile['flags']['soucang']['#markup'] ?></span>
+					 	  </button>					 	
 					  	<button type="button" class="btn btn-default">
-					  		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span class="content">212</span>
-					  	</button>
-					  	<button type="button" class="btn btn-default">
-					  		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span><span class="content">26</span>
+					  		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span class="content"><?php print $user_profile['flags']['friend']['#markup'] ?></span>
 					  	</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="itemListZone clear">
+		<div class="itemListZone clear" style="display:none;">
 			<div class="title">投资项目：</div>
 			<?php print $projects_html;?>
+		</div>
+		<?php if ($investregion_html):?>
+		<div class="scly clear">
+			<div class="title">投资地域：</div>
+			<p>
+				<?php print $investregion_html;?>
+			</p>
+		</div>
+		<?php endif;?>
+		<div class="scly clear">
+			<div class="title">投资领域：</div>
+			<p>
+				<?php print $invest_html;?>
+			</p>
 		</div>
 		<div class="tzln">
 			<div class="title">投资理念：</div>
@@ -81,7 +92,7 @@
 				<?php print $investconcept;?>
 			</p>
 		</div>
-		<div class="scly clear">
+		<div class="scly clear" style="display:none;">
 			<div class="title">擅长领域：</div>
 			<?php print $know_html;?>
 		</div>
@@ -91,7 +102,7 @@
 				<?php print $extra_value;?>
 			</p>
 		</div>
-		<div class="taGZ">
+		<div class="taGZ" style="display:none;">
 			<div class="title">TA关注：</div>
 			<ul class="itemUl">
 				<li>
