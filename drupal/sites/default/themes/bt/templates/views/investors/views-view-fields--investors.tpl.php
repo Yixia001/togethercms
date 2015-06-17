@@ -29,7 +29,7 @@ global $user;
 				<?php print $fields['picture']->content?>
 				<div class="userInfo">
 					<div>
-						<span class="name"><?php print $fields['field_nikename']->content?$fields['field_nikename']->content:$fields['field_real_name']->content?></span>
+						<span class="name"><a href="<?php print '/user/' . $row->uid?>"><?php print $fields['field_nikename']->content?$fields['field_nikename']->content:$fields['field_real_name']->content?></a></span>
 						<span class="weizhi"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span><?php print $fields['field_address_locality']->content?></span></span>
 					</div>
 					<div class="introduce">
@@ -43,7 +43,12 @@ global $user;
 						
 						
 						
+					</div>		
+					<?php if ($fields['field_prefer_investregion']->content):?>			
+					<div class="ly">
+						投资地域: <?php print $fields['field_prefer_investregion']->content?>&nbsp;
 					</div>
+					<?php endif;?>
 					<div class="ly">
 						<span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span><?php print $fields['field_investfield']->content?>&nbsp;</span>
 					</div>
@@ -55,9 +60,6 @@ global $user;
 					 	  </button>					 	
 					  	<button type="button" class="btn btn-default">
 					  		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span class="content"><?php print $fields['friend_link']->content?></span>
-					  	</button>
-					  	<button type="button" class="btn btn-default">
-					  		<span class="glyphicon glyphicon-comment" aria-hidden="true"></span><span class="content"><a href="/rychat/<?php print $row->uid?>" target="_blank">联系投资人</a></span>
 					  	</button>
 					</div>					
 				</div>
