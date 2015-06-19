@@ -18,6 +18,8 @@
  *
  * @ingroup views_templates
  */
+$name_widget = $widgets['filter-field_real_name_value'];
+unset($widgets['filter-field_real_name_value']);
 ?>
 <?php if (!empty($q)): ?>
   <?php
@@ -28,6 +30,8 @@
 <?php endif; ?>
 <div class="views-exposed-form">
   <div class="views-exposed-widgets clearfix">
+    <div class="investor_filter filterZone hid">
+    
     <?php foreach ($widgets as $id => $widget): ?>
       <div id="<?php print $widget->id; ?>-wrapper" class="views-exposed-widget views-widget-<?php print $id; ?>">
         <?php if (!empty($widget->label)): ?>
@@ -40,28 +44,18 @@
         </div>
       </div>
     <?php endforeach; ?>
-    <?php if (!empty($sort_by)): ?>
-      <div class="views-exposed-widget views-widget-sort-by">
-        <?php print $sort_by; ?>
-      </div>
-      <div class="views-exposed-widget views-widget-sort-order">
-        <?php print $sort_order; ?>
-      </div>
-    <?php endif; ?>
-    <?php if (!empty($items_per_page)): ?>
-      <div class="views-exposed-widget views-widget-per-page">
-        <?php print $items_per_page; ?>
-      </div>
-    <?php endif; ?>
-    <?php if (!empty($offset)): ?>
-      <div class="views-exposed-widget views-widget-offset">
-        <?php print $offset; ?>
-      </div>
-    <?php endif; ?>
+
+    </div>
     <div class="views-exposed-widget">
     <ul>
     <li>
+      <?php print $name_widget->widget; ?>
+    </li>
+    <li>
       <?php print $button; ?>
+      
+			<span class="filter_btn"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></span>
+		
     </li>
     <?php if (!empty($reset_button)): ?>
       <li>

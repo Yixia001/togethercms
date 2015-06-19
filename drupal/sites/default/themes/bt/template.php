@@ -27,6 +27,9 @@ function bt_preprocess_page(&$vars) {
 			drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/touziList.css', array (
 					'group' => CSS_THEME 
 			) );
+			drupal_add_js ( drupal_get_path ( 'theme', 'bt' ) . '/js/itemList.js', array (
+					'group' => CSS_THEME
+			) );
 			break;
 	}
 	

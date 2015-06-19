@@ -75,7 +75,9 @@
 	float:left;
 	margin-right:10px;
 }
-
+.views-exposed-form .views-exposed-widget .form-submit{
+	margin-top:0;
+}
 .downPart{
 	padding-top: 15px;
 }
@@ -84,4 +86,7 @@
 		background: #f2f2f2;
 		padding: 0 6px;
 		margin:0 6px;
+	}
+	.investor_filter{
+	  display:none1;
 	}
