@@ -107,6 +107,14 @@ function bt_preprocess_user_profile_form(&$vars) {
 			hide($vars['form']['profile_preference_setting']['field_prefer_investlimit'][LANGUAGE_NONE]['_none']);
 			
 			break;
+		case 'financing_demand':
+			$vars['page_class'] = 'user_profile_demand' ;
+			$vars['theme_hook_suggestions'][] = 'user_profile_form__demand';
+			$vars['field_financing_amount'] = drupal_render($vars['form']['profile_financing_demand']['field_financing_amount']);
+			hide($vars['form']['profile_financing_demand']['field_partner_financing_stage'][LANGUAGE_NONE]['_none']);
+			hide($vars['form']['profile_financing_demand']['field_project_areas'][LANGUAGE_NONE]['_none']);
+			
+			break;		
 		default:
 			$vars['page_class'] = '' ;
 	}

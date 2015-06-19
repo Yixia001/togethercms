@@ -61,6 +61,8 @@ function manage_account_form_alter(&$form, &$form_state, $form_id) {
 			//hide($form['account']['mail']);
 			hide($form['locale']);
 			hide($form['flag_friend']);
+			hide($form['field_sourceid']);
+			hide($form['field_origin']);
 			
 			//$form['account']['pass']['#title_display'] = 'invisible';
 		}
@@ -84,11 +86,14 @@ function manage_account_register_validate(&$form, &$form_state) {
 }
 
 function manage_account_register_submit(&$form, &$form_state) {
+	global $user;
 	$role = $form_state['values']['role'];
 	if ($role == ROLE_INVESTOR) {
-		drupal_goto('projects');
+		$path = 'user/' . $user->uid . '/edit/preference_setting';
+		drupal_goto($path);
 	}
 	if ($role == ROLE_PARTNER) {
-		drupal_goto('investors');
+		$path = 'user/' . $user->uid . '/edit/financing_demand';
+		drupal_goto($path);
 	}
 }

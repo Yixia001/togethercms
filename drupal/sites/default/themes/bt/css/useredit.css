@@ -5,7 +5,12 @@
 	display:inline;
 }
 .user_profile{
+	float:left;
 	padding-bottom:50px;
+	margin:20px 0;
+}
+.group-description{
+	clear:both;
 }
 .form-item-profile-gender{
 	clear:both;
@@ -43,5 +48,22 @@
 .form-group .checkbox,.form-group .radio{
 	  float:left;
 	  margin-top:0;
-	  margin-left:10px;
+	  margin-left:20px;
+}
+.user_profile_demand {
+	margin:20px 0;
+	float:left;
+}
+.user_profile_demand .form-group{
+	  float:left;
+	  clear:both;
+}
+.user_profile_demand .field-type-addressfield{
+	width:100%;
+}
+.user_profile_demand .field-type-addressfield .form-group{
+	clear:none;
+}
+.user_profile_demand .field-type-addressfield .addressfield-container-inline{
+	clear:both;
 }
