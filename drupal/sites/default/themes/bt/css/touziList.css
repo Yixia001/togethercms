@@ -140,5 +140,8 @@
 		line-height: 27px;
 	}
 	.form-item-real-name{
-	  width:120px;
+	  width:110px;
+	}
+	.form-item-real-name .form-control{
+	  padding:6px 6px;
 	}
