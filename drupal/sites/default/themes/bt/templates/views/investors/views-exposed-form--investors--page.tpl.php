@@ -31,19 +31,21 @@ unset($widgets['filter-field_real_name_value']);
 <div class="views-exposed-form">
   <div class="views-exposed-widgets clearfix">
     <div class="investor_filter filterZone hid">
-    
+    <ul>
     <?php foreach ($widgets as $id => $widget): ?>
-      <div id="<?php print $widget->id; ?>-wrapper" class="views-exposed-widget views-widget-<?php print $id; ?>">
+      <li class="item clear"">
         <?php if (!empty($widget->label)): ?>
-          <label for="<?php print $widget->id; ?>">
+        <label for="<?php print $widget->id; ?>">
             <?php print $widget->label; ?>
           </label>
+         
         <?php endif; ?>
-        <div class="views-widget">
+        
           <?php print $widget->widget; ?>
-        </div>
-      </div>
+        
+      </li>
     <?php endforeach; ?>
+    </ul>
 
     </div>
     <div class="views-exposed-widget">
@@ -52,16 +54,17 @@ unset($widgets['filter-field_real_name_value']);
       <?php print $name_widget->widget; ?>
     </li>
     <li>
-      <?php print $button; ?>
-      
-			<span class="filter_btn"><span class="glyphicon glyphicon-filter" aria-hidden="true"></span></span>
-		
+      <?php print $button; ?>		
     </li>
     <?php if (!empty($reset_button)): ?>
       <li>
         <?php print $reset_button; ?>
       </li>
     <?php endif; ?>
+    
+    <li>      
+			<span class="filter_btn"><button class="btn btn-default form-submit">过滤</button></span>
+		</li>
     </ul>
     </div>
     

@@ -68,6 +68,8 @@ function manage_account_form_alter(&$form, &$form_state, $form_id) {
 		}
 	}
 	if ($form['#id'] == 'views-exposed-form-investors-page') {
+		$form['real_name']['#attributes']['placeholder'] = '搜索投资人';
+		$form['submit']['#value'] = '搜索';
 		unset($form['investregion']['#options']['不限']);
 		foreach(element_children($form) as $key) {			
 			if ($form[$key]['#type'] == 'select') {

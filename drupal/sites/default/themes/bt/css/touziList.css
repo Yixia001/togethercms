@@ -90,3 +90,55 @@
 	.investor_filter{
 	  display:none1;
 	}
+	
+	.filterZone{
+	position: absolute;
+	top: 48px;
+	left: 0;
+	background: #f88538;
+	width:100%;
+	padding: 5px;
+	color: #fff;
+	z-index: 4;
+	height: auto;
+	overflow: auto;
+	/* border: 1px solid #f88538; */
+}
+	.filterZone .item{
+		position: relative;
+		padding-left: 20px;
+	}
+	.filterZone .item a{
+		color:#fff;
+		text-decoration:none;
+	}
+	.filterZone .item .form-type-select{
+	  padding:2px 10px 10px 10px;
+	}
+	.filterZone .glyphicon {
+	  font-weight:400;
+	  font-size:18px;
+	}
+	.filterZone .item .form-type-bef-link{
+		float: left;
+		border: 1px solid rgba(40,136,174,.6);
+		margin-right: 10px;
+		margin-bottom: 4px;
+		padding: 2px 6px;
+		border-radius: 6px;
+		cursor: pointer;
+	}
+	.filterZone .item .active{
+		background: #fff;
+		color: #000;
+	}
+	.filterZone .item span{
+		position: absolute;
+		top: 0;
+		left: 25px;
+		height: 27px;
+		line-height: 27px;
+	}
+	.form-item-real-name{
+	  width:120px;
+	}
