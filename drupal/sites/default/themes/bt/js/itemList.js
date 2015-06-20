@@ -16,6 +16,7 @@ function addItemListEvent(){
 
 	$('.filter_btn').click(function(){
 		$('.filterZone').toggleClass('hid');
+		return false;
 	});
 
 	$('.filterZone .item').delegate('li','click',function(){
