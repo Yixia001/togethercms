@@ -4,7 +4,6 @@ jQuery(document).ready(function($){
 
 function addItemListEvent(){
 	$('.hleft').click(function(){
-		alert('左边点击事件');
 	});
 
 	$('.hright').click(function(){
@@ -13,7 +12,6 @@ function addItemListEvent(){
 
 	$('.queryBtn').click(function(){
 		var val = $('.submitNo').val();
-		alert(val);
 	});
 
 	$('.filter_btn').click(function(){
