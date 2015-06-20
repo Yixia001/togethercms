@@ -32,7 +32,7 @@ function addItemListEvent(){
 	});
 
 	$('.btnsUl').delegate('li','click',function(){
-		alert('\''+$(this).text()+'\'点击事件');
+		//alert('\''+$(this).text()+'\'点击事件');
 	});
 
 	$('#typeListTable').delegate('td','click',function(){

@@ -73,7 +73,7 @@
 		}
 .views-exposed-widget li{
 	float:left;
-	margin-right:5px;
+	margin-right:3px;
 }
 .views-exposed-form .views-exposed-widget .form-submit{
 	margin-top:0;
@@ -140,5 +140,5 @@
 		line-height: 27px;
 	}
 	.form-item-real-name{
-	  width:100px;
+	  width:110px;
 	}
