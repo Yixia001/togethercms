@@ -1,0 +1,191 @@
+<?php
+
+/**
+ * @file
+ * Implements sms CAPTCHA for use with the CAPTCHA module
+ */
+define ( 'sms_captcha_ALLOWED_CHARACTERS', 'aAbBCdEeFfGHhijKLMmNPQRrSTtWXYZ23456789' );
+
+/**
+ * Implements hook_help().
+ */
+function sms_captcha_help($path, $arg) {
+	switch ($path) {
+		case 'admin/config/people/captcha/sms_captcha' :
+			$output = '<p>' . t ( 'The sms CAPTCHA is a popular challenge where a random textual code is sent to mobile.' ) . '</p>';
+			return $output;
+	}
+}
+
+/**
+ * Implements hook_menu().
+ */
+function sms_captcha_menu() {
+	$items = array ();
+	// Add an administration tab for sms_captcha.
+	$items ['admin/config/people/captcha/sms_captcha'] = array (
+			'title' => 'SMS CAPTCHA',
+			'file' => 'sms_captcha.admin.inc',
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array (
+					'sms_captcha_settings_form' 
+			),
+			'access arguments' => array (
+					'administer CAPTCHA settings' 
+			),
+			'type' => MENU_LOCAL_TASK 
+	);
+	// Callback for generating an sms.
+	$items ['sms_captcha'] = array (
+			'file' => 'sms_captcha.user.inc',
+			'page callback' => 'sms_captcha_send',
+			'access callback' => TRUE,
+			'type' => MENU_CALLBACK 
+	);
+	return $items;
+}
+
+/**
+ * Implements hook_captcha().
+ */
+function sms_captcha_captcha($op, $captcha_type = '', $captcha_sid = NULL) {
+	switch ($op) {
+		case 'list' :
+			// Only offer the sms CAPTCHA if it is possible to generate an sms on this setup.
+			return array (
+					'SMS Captcha' 
+			);
+		
+		case 'generate' :
+			if ($captcha_type == 'SMS Captcha') {
+				// In maintenance mode, the sms CAPTCHA does not work because the request
+				// for the sms itself won't succeed (only ?q=user is permitted for
+				// unauthenticated users). We fall back to the Math CAPTCHA in that case.
+				$result = array ();
+				
+				$result ['solution'] = empty ( $_SESSION ['securecode'] ) ? rand ( 1000, 9999 ) : $_SESSION ['securecode'];
+				$result ['form'] ['captcha_response'] = array (
+						'#type' => 'textfield',
+						'#title' => t ( 'Secure code' ),
+						'#description' => t ( 'To receive a secure code, fill your phone number below and click Call' ),
+						'#size' => 5,
+						'#maxlength' => 4,
+						'#required' => TRUE 
+				);
+				
+		/*		$result ['form'] ['phonenumber'] = array (
+						'#type' => 'textfield',
+						'#title' => t ( 'Phone' ),
+						'#description' => t ( 'Phone number to call. Country outside Canada and United States, put 00 in before your country code. Only direct line is supported. Extension is not supported.' ),
+						'#size' => 30,
+						'#required' => FALSE 
+				);*/
+			//	$result ['form']['box'] = array(
+				//		'#type' => 'fieldset'
+			//	);
+				$result ['form'] ['submit'] = array (
+						'#type' => 'submit',
+						'#id' => 'callnow',
+						'#ajax' => array (
+								'callback' => 'sms_captcha_submit_callback',
+								//'wrapper' => 'box' 
+						),
+						'#value' => t ( 'Send' ) ,
+					//	'#limit_validation_errors' => array(),
+					//	'#submit' => array('sms_captcha_submit'),
+				);
+				$result['form']['#attached']['js'] = array
+				(
+						array
+						(
+								'type'  => 'file',
+								'data' => drupal_get_path('module', 'sms_captcha') . '/sms_captcha.js',
+						),
+				);
+				$_SESSION ['securecode'] = $result ['solution'];
+				//$result ['form']  ['markup']['#markup'] = '<div id="box">' . t ( 'Provide your phone number and click on Call button to receive a secure code.' ) . '</div>';
+				return $result;
+				
+			}
+			break;
+	}
+}
+
+
+/**
+ * Implements Ajax call back function when 'Call' button was clicked.
+ */
+function sms_captcha_submit_callback($form, &$form_state) {
+
+	$phone = $form_state['values']['name'];
+	$code = $_SESSION['securecode'];
+	
+	// Assemble the public key to encrypt the message.
+	$response = sms_send($phone, $code);
+	
+/*	$element['submit'] = array (
+			'#type' => 'submit',
+			'#id' => 'callnow',
+			'#ajax' => array (
+					'callback' => 'sms_captcha_submit_callback',
+					'wrapper' => 'box'
+			),
+			'#value' => t ( 'Send' ) ,
+			'#prefix' => '<div id=box>',
+	);
+	$element['box']['#markup'] = '<div>' . t('You will receive the phone call shortly') . '</div></div>';
+	//$form_state['rebuild'] = TRUE;
+	 * 
+	 */
+/*	if (!$response->code == 200) {
+		$text = t('None good responding back from phonewithcomputer.com.');
+		$element['#markup'] = '<b>' . t('Please contact the administrator of this website. Make sure the system was configured properly.') . '</b>';
+		watchdog('phone_captcha', $text);
+	}
+	else {
+		$element['#markup'] = $response->data;
+		if($response->data == 'TRUE') {
+			$element['#markup'] = '<b>' . t('You will receive the phone call shortly') . '</b>';
+			$_SESSION['securecode'] = '';
+		}
+		if($response->data == 'FALSE') {
+			$element['#markup'] = '<b>' . t('There are some problem with your phone number. Please fix it and try again.') . '</b>';
+		}
+		if($response->data == 'WRONG FORMAT') {
+			$element['#markup'] = '<b>' . t('Please contact the administrator of this website. Make sure the system was configured properly.') . '</b>';
+		}
+		if($response->data == 'EXPIRED') {
+			$element['#markup'] = '<b>' . t('Service is expired.') . '</b>';
+		}
+	}
+	
+	return $element;*/
+/*	$commands = array();
+	$form['captcha']['captcha_widgets']['markup']['#markup'] = '<div id="box">' . 'You will receive shortly' . '</div>';
+	// Next, we create our insert function that will insert our updated content
+	// back into the page. To do this, we use the system provided
+	// ajax_command_html() function. We pass this function two values:
+	// 1) Our AJAX wrapper (that we defined as the #prefix and #suffix of our form element)
+	// 2) The rendered HTML that needs to be inserted into the wrapper in the page.
+	//$commands[] = ajax_command_html('#edit-box', render($form['captcha']['captcha_widgets']['box']));
+	
+	// Next, we will use the system provided ajax_command_alert() function as an example to show it's
+	// working:
+	//$commands[] = ajax_command_alert(t('ajax_command_alert() is working'));
+	
+	// Next we will include a custom function that we will call ourselves in our JavaScript file:
+	$commands[] = array
+	(
+			// The command will be used in our JavaScript file (see next section)
+			'command' => 'afterAjaxCallback',
+			// We pass the value that the user selected in the select element to our
+			// JavaScript function:
+			'selectedValue' => $form_state['values']['phonenumber'],
+	);
+	*/
+	// And finally, we will return all of our commands to the system to be executed:
+	//return array('#type' => 'ajax', '#commands' => $commands);
+	//$element = $form ['box'];
+	$element ['#markup'] = '<b>' . t ( 'You will receive the phone call shortly' ) . '</b>';
+	return $element;//$form['captcha']['captcha_widgets']['markup'];
+}

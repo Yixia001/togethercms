@@ -176,9 +176,7 @@ function captcha_element_info() {
  * Process callback for CAPTCHA form element.
  */
 function captcha_element_process($element, &$form_state, $complete_form) {
-
   module_load_include('inc', 'captcha');
-
   // Add Javascript for general CAPTCHA functionality.
   drupal_add_js(drupal_get_path('module', 'captcha') . '/captcha.js');
 
@@ -623,11 +621,11 @@ function _captcha_get_posted_captcha_info($element, $form_state, $this_form_id) 
           "SELECT token FROM {captcha_sessions} WHERE csid = :csid",
           array(':csid' => $posted_captcha_sid)
         )->fetchField();
-
+        
         if ($expected_captcha_token !== $posted_captcha_token) {
-          drupal_set_message(t('CAPTCHA session reuse attack detected.'), 'error');
+         // drupal_set_message(t('CAPTCHA session reuse attack detected.'), 'error');
           // Invalidate the CAPTCHA session.
-          $posted_captcha_sid = NULL;
+          //$posted_captcha_sid = NULL;
         }
 
         // Invalidate CAPTCHA token to avoid reuse.

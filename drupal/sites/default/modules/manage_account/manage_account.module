@@ -57,7 +57,7 @@ function manage_account_form_alter(&$form, &$form_state, $form_id) {
 			//hide($form['account']['mail']);
 			hide($form['account']['pass']);
 			hide($form['account']['current_pass']);
-			hide($form['account']['current_pass_required_values']);
+			//hide($form['account']['current_pass_required_values']);
 			//hide($form['account']['mail']);
 			hide($form['locale']);
 			hide($form['flag_friend']);
@@ -85,6 +85,7 @@ function manage_account_register_validate(&$form, &$form_state) {
 	$form_state['values']['roles'][$role] = 1;
 	$form_state['values']['field_phone_number'][LANGUAGE_NONE][0]['value'] = $form_state['values']['name'];
 	//dpm($form_state, 's');
+	//sms_send('18611125308', 'test 短信1234', array());
 }
 
 function manage_account_register_submit(&$form, &$form_state) {

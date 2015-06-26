@@ -1,0 +1,14 @@
+name = "SMS Huyi"
+description = "Allows the SMS Framework to use huyi.com as a gateway."
+package = SMS Framework
+dependencies[] = sms
+core = 7.x
+
+files[] = sms_huyi.module
+
+; Information added by drupal.org packaging script on 2013-10-01
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "sms_huyi"
+datestamp = "1380628966"
+

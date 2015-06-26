@@ -64,10 +64,14 @@ function bt_preprocess_user_login(&$var) {
 	) );
 	// $variables['intro_text'] = t('This is my awesome login form');
 	$var ['form'] ['name'] ['#title_display'] = 'invisible';
-	unset ( $var ['form'] ['name'] ['#description'] );
+	if (isset($var ['form'] ['name'] ['#description'])) {
+	  unset ( $var ['form'] ['name'] ['#description'] );
+	}
 	$var ['form'] ['name'] ['#attributes'] ['placeholder'] = t ( '请输入11位手机号码' );
 	$var ['form'] ['pass'] ['#title_display'] = 'invisible';
-	unset ( $var ['form'] ['pass'] ['#description'] );
+	if (isset($var ['form'] ['pass'] ['#description'])) {
+	  unset ( $var ['form'] ['pass'] ['#description'] );
+	}
 	// /$variables['rendered'] = drupal_render_children($variables['form']);
 	$var ['form'] ['actions'] ['submit'] ['#attributes'] ['class'] = array (
 			'btn-primary',
@@ -86,7 +90,14 @@ function bt_preprocess_user_register_form(&$var) {
 	
 	// /$variables['rendered'] = drupal_render_children($variables['form']);
 	// $var['form']['role'][6]['#title_display'] = 'none';
-	// dpm($var['form'], 'x');
+	//dpm($var['form'], 'x');
+	$var['form']['captcha']['captcha_widgets']['captcha_response']['#attributes'] ['placeholder'] = t ( '请输入手机获取的验证码' );
+	$var['form']['captcha']['captcha_widgets']['captcha_response']['#attributes']['class'] = array('submitNo');
+	unset($var['form']['captcha']['captcha_widgets']['captcha_response']['#description']);
+	$var['form']['captcha']['captcha_widgets']['captcha_response']['#title_display'] = 'invisible';
+	$var['captcha_response'] = drupal_render($var['form']['captcha']['captcha_widgets']['captcha_response']);
+	$var['form']['captcha']['captcha_widgets']['submit']['#value'] = '发送验证码';
+	$var['send_button'] = drupal_render($var['form']['captcha']['captcha_widgets']['submit']);
 }
 function bt_preprocess_user_profile_form(&$vars) {
 	drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/useredit.css', array (

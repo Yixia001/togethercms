@@ -1,0 +1,116 @@
+<?php
+
+/**
+ * Implements hook_help().
+ */
+function gammu_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#gammu':
+      $output = t('<p>Gammu SMS Gateway.</p>');
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_permission().
+ */
+function gammu_permission() {
+  return array(
+    'administer gammu' => array(
+      'title' => t('administer gammu'),
+      'description' => t('TODO Add a description for \'administer gammu\''),
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function gammu_menu() {
+  $items = array();
+  $items['admin/config/content/gammu'] = array(
+    'title' => 'Gammu SMS Gateway',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('gammu_settings'),
+    'access arguments' => array('administer gammu'),
+    'file' => 'gammu.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
+function gammu_connection() {
+  $gammu_dbengine = variable_get('gammu_dbengine', 'mysql');
+  $gammu_dbuser   = variable_get('gammu_dbuser', '');
+  $gammu_dbpass   = variable_get('gammu_dbpass', '');
+  $gammu_dbhost   = variable_get('gammu_dbhost', 'localhost');
+  $gammu_dbname   = variable_get('gammu_dbname', 'smsd');
+
+  $gammu_dbengine = ($gammu_dbengine == 'mysqli') ? 'mysql' : 'mysql';
+  
+  $gammu_db = array(
+      'database' => $gammu_dbname,
+      'username' => $gammu_dbuser,
+      'password' => $gammu_dbpass,
+      'host' => $gammu_dbhost,
+      'driver' => $gammu_dbengine,
+  );
+  // replace 'YourDatabaseKey' with something that's unique to your module
+  Database::addConnectionInfo('gammu_db', 'default', $gammu_db);
+}
+
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
+function gammu_sendsms($gammu_destinationnumber, $gammu_textdecoded, $SendingDateTime = NULL) {
+  $gammu_textdecoded_split = str_split($gammu_textdecoded, 153);
+
+  if (!$SendingDateTime) {
+    $SendingDateTime = '0000-00-00 00:00:00'; //  	0000-00-00 00:00:00
+  }
+  
+  gammu_connection();
+
+  db_set_active('gammu_db');
+
+  $count = count($gammu_textdecoded_split);
+
+  $UDH = '050003' . rand(0, 9) . rand(0, 9) . substr(100 + $count, -2) . '01';
+  
+  // UDH  050003 D5 02 01 
+  
+  if ($count == 1) {
+  //db_query("INSERT INTO outbox (SendingDateTime, DestinationNumber, TextDecoded, CreatorID)
+    db_query("INSERT INTO outbox (DestinationNumber, TextDecoded, CreatorID)
+              VALUES (:DestinationNumber, :TextDecoded, 'Drupal Gammu')", 
+              array(':DestinationNumber' =>$gammu_destinationnumber, ':TextDecoded' => $gammu_textdecoded_split[0]));
+  }
+  else {
+  //db_query("INSERT INTO outbox (SendingDateTime, DestinationNumber, TextDecoded, UDH, MultiPart, CreatorID)    
+    db_query("INSERT INTO outbox (DestinationNumber, TextDecoded, UDH, MultiPart, CreatorID)
+     VALUES (:2, :3, :4, :5, :6)", 
+     array(':2' => $gammu_destinationnumber, ':3' => $gammu_textdecoded_split[0], 
+           ':4' =>$UDH, ':5' => 'true', ':6' => 'Gammu Drupal'));
+    
+    // $ID  = db_last_insert_id('outbox', 'ID');
+    $results = db_query("SELECT ID FROM outbox ORDER BY ID DESC LIMIT 1");
+    $row = $results->fetchObject(); 
+    // $row = $results->fetch();
+    $ID = $row->ID;   
+      
+    for ($i = 1; $i <= $count -1; $i++) {
+      db_query("INSERT INTO outbox_multipart (UDH, TextDecoded, ID, SequencePosition)
+        VALUES (:1, :2, :3, :4)", 
+        array(':1' => '0' . ($UDH + $i), ':2' => $gammu_textdecoded_split[$i], ':3' => $ID, ':4' => $i + 1));
+    }
+  }
+
+  db_set_active();
+}
+
+

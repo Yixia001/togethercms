@@ -10,9 +10,9 @@
 	    </div>
 	    <div class="submitNoErrInfo errInfo hid">请输入正确的验证码</div>
 	    <div class="input-group">
-		  	<input type="text" class="form-control submitNo" placeholder="请输入手机获取的验证码" aria-describedby="basic-addon2">
+	      <?php print $captcha_response?>
 		  	<span class="input-group-btn">
-	        	<button class="btn btn-default" type="button">重新发送验证码</button>
+	        	<?php print $send_button;?>
 	      	</span>
 		</div>
 		<div class="usernameErrInfo errInfo hid">用户名不能为空</div>

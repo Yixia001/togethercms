@@ -1,0 +1,5 @@
+name = "SMS Captcha"
+description = "Provides sms based CAPTCHA challenge."
+package = "Spam control"
+dependencies[] = captcha
+core = 7.x
