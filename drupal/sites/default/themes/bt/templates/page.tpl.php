@@ -83,10 +83,10 @@
 			<div class="sub_login">
 	    <?php if ($logged_in):?>
 	      <?php global $user;?>
-	      <span class="login_name">欢迎<a href="<?php print $base_path . '/user/' . $user->uid?>"><?php print $user->name?></a></span>
+	      <span class="" style="font-size:16px;">欢迎<a href="<?php print $base_path . '/user/' . $user->uid?>">您</a></span>
 	    <?php endif;?>
 	    
-	      <a class="login_link" href="<?php if ($logged_in) { print '/user/logout'; } else { print '/user/login'; } ?>"><?php if ($logged_in) { print '登出'; } else { print '登录'; } ?></a>
+	      <a class="login_link" style="font-size:16px;" href="<?php if ($logged_in) { print '/user/logout'; } else { print '/user/login'; } ?>"><?php if ($logged_in) { print '登出'; } else { print '登录'; } ?></a>
 	       <?php if (!$logged_in){?> <a href="/user/register">注册</a><?php }?>
 	      
 	    </div>
