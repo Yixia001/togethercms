@@ -31,6 +31,38 @@ function bt_preprocess_page(&$vars) {
 					'group' => CSS_THEME
 			) );
 			break;
+			//zhb add 2015-7-13：添加竞品收藏页面css
+		case 'competitor-collection' :
+			drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/itemList.css', array (
+			'group' => CSS_THEME
+			) );
+			break;
+			//zhb add 2015-7-13：添加竞争对手投资人列表
+		case 'competitor_investors' :
+			drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/touziList.css', array (
+			'group' => CSS_THEME
+			) );
+			drupal_add_js ( drupal_get_path ( 'theme', 'bt' ) . '/js/itemList.js', array (
+					'group' => CSS_THEME
+			) );
+			break;
+			//zhb add 2015-7-13：添加可能投资我的人列表
+		case 'potential_investors' :
+			drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/touziList.css', array (
+			'group' => CSS_THEME
+			) );
+			drupal_add_js ( drupal_get_path ( 'theme', 'bt' ) . '/js/itemList.js', array (
+					'group' => CSS_THEME
+			) );
+			break;
+			//zhb add 2015-7-13：添加竞品调查投资事件
+			case 'touzi-event' :
+				drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/reset.css', array (
+				'group' => CSS_THEME
+				) );
+				break;
+			
+			
 	}
 	
 	if (strpos ( $path, 'user' ) === 0 && is_numeric ( arg ( 1 ) )) {
