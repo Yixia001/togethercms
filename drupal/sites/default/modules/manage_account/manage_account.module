@@ -3,6 +3,39 @@ require_once dirname ( __FILE__ ) . '/manage_account.api.inc';
 
 define('ROLE_PARTNER', 5);
 define('ROLE_INVESTOR', 6);
+
+/**
+ * Implements hook_menu().
+ */
+function manage_account_menu() {
+	$items['jinpindiaocha'] = array (
+			'title' => '竞品调查',
+			'page callback' => 'jinpindiaocha_page',
+			'page arguments' => array(1),
+			'access callback' => TRUE,
+			'type' => MENU_CALLBACK,
+	);
+	return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function manage_account_theme() {
+	$theme = array(
+			'jinpindiaocha_page' => array(
+					'variables' => array('content' => NULL),
+					'template' => 'template/jinpindiaocha-page',
+	    ),
+	);
+	return $theme;
+}
+
+function jinpindiaocha_page() {
+	$content = '<a href="/test">test</a>';
+	return theme('jinpindiaocha_page', array('content' => $content));
+}
+
 /**
  * Implement hook_form_alter().
  */
