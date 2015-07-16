@@ -29,7 +29,7 @@
 				<?php print $fields['picture']->content?>
 				<div class="userInfo">
 					<div>
-						<span class="name"><?php print $fields['field_nikename']->content?></span>
+						<span class="name"><a href="<?php print '/user/' . $row->uid?>"><?php print $fields['field_nikename']->content?$fields['field_nikename']->content:$fields['field_real_name']->content?></a></span>
 						<span class="weizhi"><?php print $fields['field_address_locality']->content?></span>
 					</div>
 					<div class="introduce">
