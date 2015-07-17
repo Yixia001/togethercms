@@ -40,11 +40,21 @@ function addItemListEvent(){
 		$(this).addClass('active');
 		var val = $(this).text();
 		switch(val){
-			case '名企项目':
-				doMingQ();
+			case '竞争对手调查':
+				//doMingQ();
+				location.href='/touzi-event';
 				break;
-			case '名校项目':
-				doMingX();
+			case '竞争对手收藏':
+				//doMingX();
+				location.href='/touzi-event';
+				break;
+			case '竞争对手投资人':
+				//doMingX();
+				location.href='/competitor_investors';
+				break;
+			case '可能投资我的人':
+				//doMingX();
+				location.href='/potential_investors';
 				break;
 		}
 	});

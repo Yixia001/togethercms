@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+
+#company-member-list {
+  border: 1px solid #eee !important;
+  border-top: none;
+  table-layout: fixed;
+}
+#company-member-list .colgroup col {
+  min-width: 100px;
+}
+#company-member-list tr:nth-child(odd) {
+  background-color: #fafafa;
+}
+#company-member-list a {
+  color: #7d6657 !important;
+  margin: 0 5px !important;
+}
+#company-member-list a:hover {
+  color: #ff6600 !important;
+  background-color: transparent !important;
+}

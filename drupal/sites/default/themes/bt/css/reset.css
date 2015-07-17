@@ -10,13 +10,18 @@ ul, ol {
 li{list-style:none;}
 a{text-decoration:none;}
 img{border:none;vertical-align:top;}/*将img放到a中会有border,给它去掉,同时对齐*/
-table{border-collapse:collapse;}/*表格之间有间隙,合并掉*/
+table{border-collapse:collapse;
+	  font-size: inherit; font: 100%;
+	  border: 0 none;
+      padding: 0;
+      vertical-align: baseline;}/*表格之间有间隙,合并掉*/
 input,textarea{outline:none;}/*在chrome下如果选中的时候,会自动有个高亮的动作,将其去掉*/
 textarea{resize:none;overflow:auto;}
 body{font-size:12px;font-family:"微软雅黑";}/*具体看自己的网站是怎么要求的*/
 
 body{
 	font-family: '微软雅黑','Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 12px;	/* zhb add 2015-7-17 16:20:34 */
 	focus-ring-color: rgba(0, 0, 0, 0);  
 	-webkit-tap-highlight-color: rgba(0,0,0,0);  
 	-webkit-focus-ring-color: rgba(0, 0, 0, 0);  
@@ -89,3 +94,45 @@ body{
 		right: 44px;
 		cursor: pointer;
 	}
+	
+/* zhb add 2015-7-17 16:14:23 */
+table {
+    border-collapse: collapse;
+}	
+
+
+.color_ff842e{
+	color: #ff842e;
+}
+.color_green{
+	color: green;
+}
+.color_red{
+	color: red;
+}
+.bold{
+	font-weight: bold;
+}
+.noborderbottom{
+	border-bottom: none !important;
+}
+.marginleftright20{
+	margin: 0 20px;
+}
+.marginleft10{
+	margin-left: 10px;
+}
+.marginright10{
+	margin-right: 10px;
+}
+.margintop10{
+	margin-top: 10px;
+}
+.width70bi{
+	width: 70%;
+}
+.width60bi{
+	width: 60%;
+}
+
+/*zhb add 2015-7-17 11:01:42 end*/

@@ -20,7 +20,16 @@
 	left: 0;
 	z-index: 100;
 }
-	.btnsUl li{
+.btnsUl li {
+    background: #ef5518 none repeat scroll 0 0;
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+}
+	/* .btnsUl li{
 		float: left;
 		background: #ef5518;
 		height: 48px;
@@ -29,7 +38,10 @@
 		width: 50%;
 		cursor: pointer;
 		color: #fff;
-	}
+	} */
 	.btnsUl li.active{
 		background: #f88538;
+	}
+	.btnsUl a{
+		 color: #fff;
 	}

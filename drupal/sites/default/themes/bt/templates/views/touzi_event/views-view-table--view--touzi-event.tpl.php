@@ -21,16 +21,16 @@
 ?>
 <!--zhb add 2015-7-14 :< table class="children-norml-link" id="company-member-list" style="margin: 20px auto; width: 90%;">-->
 
-<table id="company-member-list" style="margin: 20px auto; width: 90%;" class="children-norml-link" >
+<table id="company-member-list" style="margin: 20px auto; width: 100%;" class="children-norml-link" >
    <?php if (!empty($title) || !empty($caption)) : ?>
      <caption><?php print $caption . $title; ?></caption>
   <?php endif; ?>
   <?php if (!empty($header)) : ?>
     <thead>
-    <!-- <tr class="" style="background: #ff6600; color: #fff;" jQuery19107944535226066767="26">-->
+    
       <tr class="" style="background: #ff6600; color: #fff;">
         <?php foreach ($header as $field => $label): ?>
-          <!-- zhb add 2015-7-14：<th class="mytdFirst" wdith="12%"> -->
+      
           <th  class="mytdFirst" >
             <?php print $label; ?>
           </th>
