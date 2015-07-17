@@ -1,2 +1,18 @@
-<p><a href=""> 连接可以写在这里也可以写在 drupal\sites\default\modules\manage_account\manage_account.module</a></p>
-<p><?php print $content?></p>
+<BODY>
+
+<TABLE id=typeListTable class="table table-bordered" >
+<TBODY>
+<TR>
+<TD class=active>竞争对手调查</TD></TR>
+<TR>
+<TD>竞争对手收藏</TD></TR>
+<TR>
+<TD>竞争对手投资人</TD></TR>
+<TR>
+<TD>可能投资我的人</TD>
+</TR>
+</TBODY>
+</TABLE>
+
+
+</BODY>
