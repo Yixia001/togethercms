@@ -60,6 +60,35 @@ function bt_preprocess_page(&$vars) {
 				drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/reset.css', array (
 				'group' => CSS_THEME
 				) );
+				drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/style.css', array (
+				'group' => CSS_THEME
+				) ); 
+				drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/itemList.css', array (
+						'group' => CSS_THEME
+				) );
+				drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/touziEvent.css', array (
+						'group' => CSS_THEME
+				) );
+				drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/recss.css', array (
+						'group' => CSS_THEME
+				) );
+				drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/commonHeaderFooter.css', array (
+						'group' => CSS_THEME
+				) );
+				
+				break;
+			//	zhb add 2015-7-13：添加竞品调查目录导航
+			case 'jinpindiaocha' :
+				drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/reset.css', array (
+				'group' => CSS_THEME
+				) ); 
+				drupal_add_css ( drupal_get_path ( 'theme', 'bt' ) . '/css/itemList.css', array (
+				'group' => CSS_THEME
+				) );
+				//天假js文件
+				drupal_add_js ( drupal_get_path ( 'theme', 'bt' ) . '/js/itemList.js', array (
+						'group' => CSS_THEME
+				) );
 				break;
 			
 			
