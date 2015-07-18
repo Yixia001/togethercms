@@ -1,3 +1,4 @@
+@charset "utf-8";
 /**
  * This file should get overwritten if Method 1 is used. If Method 2 is chosen,
  * remove this comment and start adding your styles to this file.
@@ -10,7 +11,7 @@
 	
  body *{
 	font-size: 13px;
-	color:#666;
+/* 	color:#666;  */
 	list-style:none;
 	font-family:"Microsoft YaHei","微软雅黑",sans-serif;
 }
@@ -57,7 +58,7 @@ a {
 	min-width:70px;
 	min-height: 70px;
 	float: left;
-	margin：10px;
+	margin锛�0px;
 }
 .user_basic_name{
 	font-size: 16pt;
