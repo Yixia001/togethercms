@@ -111,7 +111,9 @@
           <?php print render($tabs); ?>
         </div>
       <?php endif; ?>
-      ccc
+      <div class="top-region">
+    <?php print render($page['top']); ?>
+    </div>
 		<?php print render($page['content']); ?>
 </div>
 	

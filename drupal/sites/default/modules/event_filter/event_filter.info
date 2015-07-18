@@ -1,0 +1,5 @@
+name = Event filter
+description = "Taxonomy filter on touzi event page"
+package = "Together"
+core = 7.x
+files[] = event_filter.module

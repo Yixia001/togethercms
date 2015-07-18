@@ -134,5 +134,14 @@ table {
 .width60bi{
 	width: 60%;
 }
-
+.top-region li {
+	float:left;
+	margin:10px;
+}
+.children_terms {
+	clear:both;
+}
+.top-region li a.hover{
+	background-color:red;
+}
 /*zhb add 2015-7-17 11:01:42 end*/

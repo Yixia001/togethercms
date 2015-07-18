@@ -8,17 +8,24 @@ base theme = bootstrap
 ;; Regions
 ;;;;;;;;;;;;;;;;;;;;;
 
-regions[navigation]     = 'Navigation'
-regions[header]         = 'Top Bar'
-regions[highlighted]    = 'Highlighted'
-regions[help]           = 'Help'
+regions[top]        = 'Top'
 regions[content]        = 'Content'
-regions[sidebar_first]  = 'Primary'
-regions[sidebar_second] = 'Secondary'
 regions[footer]         = 'Footer'
-regions[page_top]       = 'Page top'
-regions[page_bottom]    = 'Page bottom'
 
+; Layout: Default
+layouts[default][name] = "Default"
+layouts[default][description] = "Default layout"
+layouts[default][template] = "templates/page"
+layouts[default][regions][] = "content"
+layouts[default][regions][] = "footer"
+
+; Layout: top block
+layouts[top_region][name] = "Top region"
+layouts[top_region][description] = "The page with top block"
+layouts[top_region][template] = "templates/page-top"
+layouts[top_region][regions][] = "top"
+layouts[top_region][regions][] = "content"
+layouts[top_region][regions][] = "footer"
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Stylesheets
