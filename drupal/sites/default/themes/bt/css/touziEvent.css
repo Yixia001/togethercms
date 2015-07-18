@@ -169,4 +169,12 @@ hr {display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 
 #company-member-list-tbl img { margin: 0 auto; width: 50px; height: 50px; display: block; }
 #company-member-list-tbl td, #company-member-list-tbl th { vertical-align: middle; padding: 20px; height: 50px 0; text-align: center; border-top: 1px solid #f1f1f1; border-right: 1px solid #f1f1f1; }
 #company-member-list-tbl td.no-rigth-border, #company-member-list-tbl th.no-rigth-border { border-right: none 0; }
+
+/* zhb 2015-7-20 15:20:39 add 投资事件头部选择器样式 */
+.clearfix::before, .clearfix::after {
+    content: " ";
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
 	

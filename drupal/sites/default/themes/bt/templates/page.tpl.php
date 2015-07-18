@@ -111,7 +111,7 @@
           <?php print render($tabs); ?>
         </div>
       <?php endif; ?>
-      ccc
+
 		<?php print render($page['content']); ?>
 </div>
 	

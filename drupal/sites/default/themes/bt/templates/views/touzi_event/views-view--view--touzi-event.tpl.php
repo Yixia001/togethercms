@@ -40,7 +40,7 @@
   <?php endif; ?>
 
   <?php if ($exposed): ?>
-    <div class="view-filters">
+    <div class="view-filters" style="display:none" >
       <?php print $exposed; ?>
     </div>
   <?php endif; ?>

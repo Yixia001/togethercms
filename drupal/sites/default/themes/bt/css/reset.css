@@ -6,6 +6,7 @@ em{font-style:normal;}
 ul, ol {
   margin-top: 0;
   margin-bottom: 0px;
+  border:1px solid #CCC
 }
 li{list-style:none;}
 a{text-decoration:none;}
@@ -141,7 +142,10 @@ table {
 .children_terms {
 	clear:both;
 }
+//zhb 投资事件行业和子领域标签颜色
 .top-region li a.hover{
-	background-color:red;
+	background-color:#ff6600;
+	background: #f60 none repeat scroll 0 0;
+    color: #fff;
 }
 /*zhb add 2015-7-17 11:01:42 end*/
