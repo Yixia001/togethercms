@@ -35,7 +35,7 @@
             <?php print $label; ?>
           </th>
         <?php endforeach; ?>
-         <TH class="mytdFirst" width="5%"><INPUT id="all" value="全选"  type=checkbox name="all"></TH>
+        
       </tr>
       
      
@@ -52,7 +52,7 @@
           </td>
         <?php endforeach; ?>
         
-		<TD><INPUT id="eventSelected" value="" type="checkbox" name="eventSelected"></TD>
+		
       </tr>
     <?php endforeach; ?>
   </tbody>
