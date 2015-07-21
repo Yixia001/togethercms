@@ -4,7 +4,7 @@
  */
 function event_filter_block_info() {
 	$blocks ['event_filter_top_menu'] = array (
-			'info' => t ( 'Top menu filter on touzi event.' ),
+			'info' => t ( '行业：' ),
 			'cache' => DRUPAL_CACHE_PER_ROLE 
 	);
 	return $blocks;
@@ -16,14 +16,15 @@ function event_filter_block_info() {
 function event_filter_block_view($delta = '') {
 	switch ($delta) {
 		case 'event_filter_top_menu' :
-			$block ['subject'] = t ( 'Top menu filter on touzi event.' );
+			$block ['subject'] = t ( '行业：' );
 			$block ['content'] = event_filter_top_menu_contents ( $delta );
 			break;
 	}
 	return $block;
 }
 function event_filter_top_menu_contents($delta) {
-	$content = '<div class="parent_terms"><ul class="list-unstyled left-nav">';
+	$content = '<div class="parent_terms">
+	<ul class="list-unstyled left-nav">';
 	$sql = "SELECT td.tid, td.name
             FROM taxonomy_term_data td
             INNER JOIN taxonomy_vocabulary v ON v.vid = td.vid
@@ -63,7 +64,10 @@ function event_filter_top_menu_contents($delta) {
 		) ) . '</li>';
 	}
 	
-	$content .= '</ul></div><div class="children_terms"><ul class="list-unstyled left-nav">';
+	$content .= '</ul></div><div class="children_terms">
+	<h4 class="pull-left">子领域：</h4>
+	<div class="children_terms">
+	<ul class="list-unstyled left-nav">';
 	
 	if ($field_event_type_tid) {
 		$sql = "SELECT td.tid, td.name
@@ -88,7 +92,7 @@ function event_filter_top_menu_contents($delta) {
 			) ) . '</li>';
 		}
 	}
-	$content .= '</ul></div>';
+	$content .= '</ul></div></div>';
 	
 	return $content;
 }
